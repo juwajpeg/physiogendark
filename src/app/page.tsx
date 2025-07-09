@@ -364,7 +364,7 @@ export default function PhysiogenFit() {
           >
             <nav className="py-6 space-y-4">
               {["Clinical Services", "Treatment Protocol", "Clinical Team", "Case Studies", "Consultation"].map(
-                (item, index) => (
+                (item) => (
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -840,9 +840,9 @@ export default function PhysiogenFit() {
                         desc: "State-of-the-art rehabilitation and assessment center",
                         href: "https://maps.google.com/?q=123+Medical+Plaza+Healthcare+District",
                       },
-                    ].map((contact, index) => (
+                    ].map((contact) => (
                       <a
-                        key={index}
+                        key={contact.label}
                         href={contact.href}
                         className="group text-center p-8 rounded-2xl transition-all duration-300 hover:bg-gray-800/90 hover:shadow-lg cursor-pointer backdrop-blur-sm block border border-gray-700/30"
                       >
