@@ -896,7 +896,7 @@ export default function PhysiogenFit() {
                 "Consultation",
                 "Privacy Policy",
                 "Terms of Service",
-              ].map((item, index) => (
+              ].map((item) => (
                 <Link
                   key={item}
                   href={`#${item.toLowerCase().replace(" ", "-")}`}
