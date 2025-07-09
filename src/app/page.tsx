@@ -516,9 +516,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {clinicalServices.map((service, index) => (
+              {clinicalServices.map((service) => (
                 <Card
-                  key={index}
+                  key={service.title}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div
@@ -542,8 +542,8 @@ export default function PhysiogenFit() {
 
                       <div className="space-y-3 pl-22">
                         <h4 className="text-sm font-medium text-gray-200 mb-3">Clinical Modalities:</h4>
-                        {service.modalities.map((modality, idx) => (
-                          <div key={idx} className="flex items-center space-x-3 text-sm text-gray-300">
+                        {service.modalities.map((modality) => (
+                          <div key={modality} className="flex items-center space-x-3 text-sm text-gray-300">
                             <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
                             <span>{modality}</span>
                           </div>
@@ -660,9 +660,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {clinicalTeam.map((clinician, index) => (
+              {clinicalTeam.map((clinician) => (
                 <Card
-                  key={index}
+                  key={clinician.name}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div
@@ -732,9 +732,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {clinicalOutcomes.map((study, index) => (
+              {clinicalOutcomes.map((study) => (
                 <Card
-                  key={index}
+                  key={study.patient}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
