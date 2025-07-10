@@ -444,8 +444,7 @@ export default function PhysiogenFit() {
                   className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 ease-out delay-300"
                   style={{ transform: `translateY(${scrollY * 0.02}px)` }}
                 >
-                  Integrating cutting-edge biomechanical analysis, evidence-based therapeutic interventions, and
-                  personalized treatment protocols to optimize human movement and physiological function.
+                  Physiogen is the leading Physiotherapy, Hijama & Chiropractic Center located at the heart of Bahria Town, Lahore. We provide the best Physiotherapy, Chiropractic, Hijama Therapy and Dry Needling services to get you back to your active and pain free life.
                 </p>
               </div>
 
@@ -519,9 +518,7 @@ export default function PhysiogenFit() {
               </div>
               <h2 className="text-5xl font-extralight text-white mb-6">Evidence-Based Treatment Modalities</h2>
               <p className="text-xl text-gray-300 font-light max-w-4xl mx-auto">
-                Comprehensive therapeutic services utilizing advanced diagnostic protocols, biomechanical assessment
-                methodologies, and evidence-based intervention strategies to optimize physiological function and
-                movement efficiency.
+                Complete healthcare services using modern diagnostic tools, detailed movement analysis, and proven treatment methods to improve body function and mobility effectively.
               </p>
             </div>
 
@@ -560,10 +557,7 @@ export default function PhysiogenFit() {
                         ))}
                       </div>
 
-                      <div className="flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2 pl-22">
-                        <span className="text-sm font-light">Review Clinical Protocol</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </div>
+
                     </div>
                   </CardContent>
                 </Card>
