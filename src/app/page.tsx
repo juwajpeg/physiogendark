@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { initDataLayer, trackButtonClick, trackPhoneClick, trackEmailClick, trackScrollDepth } from "@/lib/gtm"
 import {
   Menu,
   X,
@@ -16,6 +15,7 @@ import {
   Heart,
   Shield,
   Calendar,
+  ArrowRight,
   Star,
   Users,
   Award,
@@ -27,6 +27,7 @@ import {
   Microscope,
   Dna,
   Stethoscope,
+  Globe,
 } from "lucide-react"
 
 export default function PhysiogenFit() {
@@ -40,9 +41,6 @@ export default function PhysiogenFit() {
   const [headerVisible, setHeaderVisible] = useState(true)
 
   useEffect(() => {
-    // Initialize GTM data layer
-    initDataLayer()
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       setScrollY(currentScrollY)
@@ -70,12 +68,6 @@ export default function PhysiogenFit() {
           setActiveSection(index)
         }
       })
-
-      // Track scroll depth
-      const scrollPercentage = Math.round((currentScrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100)
-      if (scrollPercentage % 25 === 0 && scrollPercentage > 0) {
-        trackScrollDepth(scrollPercentage)
-      }
     }
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -177,6 +169,13 @@ export default function PhysiogenFit() {
       specialty: "Clinical Nutrition & Metabolic Health",
       credentials: "Registered Dietitian & Exercise Physiologist",
       gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      name: "Dr. Michael Thompson, DPT, OCS",
+      role: "Sports Medicine Specialist",
+      specialty: "Athletic Performance & Injury Prevention",
+      credentials: "Orthopedic Clinical Specialist & Sports Physical Therapy",
+      gradient: "from-orange-500 to-red-500",
     },
   ]
 
@@ -327,16 +326,22 @@ export default function PhysiogenFit() {
           <div className="flex items-center justify-between h-20">
             <Link
               href="#home"
-              className="text-2xl font-light text-white transition-all duration-300 hover:text-blue-400 relative group -ml-4"
+              className="text-xl font-light text-white transition-all duration-300 hover:text-blue-400 relative group"
             >
-              PHYSIOGEN
+              Physiogen
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-12 ml-20">
-              {["Clinical Services", "Treatment Protocol", "Clinical Team", "Case Studies", "Consultation"].map(
-                (item, index) => (
+            <nav className="hidden md:flex items-center space-x-12 ml-auto">
+              {[
+                "Clinical Services",
+                "Treatment Protocol",
+                "Clinical Team",
+                "Case Studies",
+                "Location",
+                "Consultation",
+              ].map((item, index) => (
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -349,7 +354,7 @@ export default function PhysiogenFit() {
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887" onClick={() => trackPhoneClick("+92 313 7818887", "header")}>
+              <a href="tel:00923137818887">
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm">
                   Schedule Assessment
                 </Button>
@@ -372,8 +377,14 @@ export default function PhysiogenFit() {
             className={`md:hidden transition-all duration-500 ease-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} overflow-hidden`}
           >
             <nav className="py-6 space-y-4">
-              {["Clinical Services", "Treatment Protocol", "Clinical Team", "Case Studies", "Consultation"].map(
-                (item) => (
+              {[
+                "Clinical Services",
+                "Treatment Protocol",
+                "Clinical Team",
+                "Case Studies",
+                "Location",
+                "Consultation",
+              ].map((item, index) => (
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -384,7 +395,7 @@ export default function PhysiogenFit() {
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887" className="block" onClick={() => trackPhoneClick("+92 313 7818887", "mobile-menu")}>
+              <a href="tel:00923137818887" className="block">
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm">
                   Schedule Assessment
                 </Button>
@@ -448,7 +459,7 @@ export default function PhysiogenFit() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="tel:00923137818887" className="w-full sm:w-auto flex justify-center" onClick={() => trackButtonClick("Schedule Clinical Assessment", "hero-section")}>
+                <a href="tel:00923137818887" className="w-full sm:w-auto flex justify-center">
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
@@ -522,9 +533,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {clinicalServices.map((service) => (
+              {clinicalServices.map((service, index) => (
                 <Card
-                  key={service.title}
+                  key={index}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div
@@ -548,15 +559,18 @@ export default function PhysiogenFit() {
 
                       <div className="space-y-3 pl-22">
                         <h4 className="text-sm font-medium text-gray-200 mb-3">Clinical Modalities:</h4>
-                        {service.modalities.map((modality) => (
-                          <div key={modality} className="flex items-center space-x-3 text-sm text-gray-300">
+                        {service.modalities.map((modality, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 text-sm text-gray-300">
                             <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
                             <span>{modality}</span>
                           </div>
                         ))}
                       </div>
 
-
+                      <div className="flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2 pl-22">
+                        <span className="text-sm font-light">Review Clinical Protocol</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -663,9 +677,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {clinicalTeam.map((clinician) => (
+              {clinicalTeam.map((clinician, index) => (
                 <Card
-                  key={clinician.name}
+                  key={index}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div
@@ -735,9 +749,9 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {clinicalOutcomes.map((study) => (
+              {clinicalOutcomes.map((study, index) => (
                 <Card
-                  key={study.patient}
+                  key={index}
                   className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -780,6 +794,119 @@ export default function PhysiogenFit() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section id="location" className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 via-gray-800 to-green-900/60" />
+
+        {/* Background Location Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-1/4">
+            <MapPin className="h-24 w-24 text-green-400" />
+          </div>
+          <div className="absolute bottom-20 right-1/3">
+            <Globe className="h-20 w-20 text-blue-400" />
+          </div>
+        </div>
+
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-24">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 px-6 py-3 rounded-full text-sm font-medium text-green-300 mb-8 border border-green-500/30">
+                <MapPin className="h-4 w-4" />
+                <span>Clinical Facility Location</span>
+              </div>
+              <h2 className="text-5xl font-extralight text-white mb-6">Find Our Clinical Center</h2>
+              <p className="text-xl text-gray-300 font-light max-w-4xl mx-auto">
+                Visit our state-of-the-art rehabilitation facility equipped with advanced diagnostic equipment and
+                therapeutic technologies for comprehensive patient care.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Map Container */}
+              <div className="relative">
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.2!2d67.0!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDUxJzM4LjUiTiA2N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2s!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="grayscale hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent rounded-2xl pointer-events-none" />
+              </div>
+
+              {/* Location Details */}
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <h3 className="text-3xl font-light text-white">Physiogen Clinical Center</h3>
+                  <p className="text-gray-300 font-light leading-relaxed">
+                    Our comprehensive rehabilitation facility features cutting-edge diagnostic equipment, therapeutic
+                    modalities, and specialized treatment areas designed to provide optimal clinical outcomes.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: <MapPin className="h-5 w-5" />,
+                      label: "Address",
+                      value: "123 Medical Plaza, Healthcare District",
+                      subtext: "Karachi, Pakistan",
+                      gradient: "from-green-500 to-emerald-400",
+                    },
+                    {
+                      icon: <Phone className="h-5 w-5" />,
+                      label: "Phone",
+                      value: "+92 313 7818887",
+                      subtext: "24/7 Clinical Support",
+                      gradient: "from-blue-500 to-cyan-400",
+                    },
+                    {
+                      icon: <Mail className="h-5 w-5" />,
+                      label: "Email",
+                      value: "clinical@physiogen.fit",
+                      subtext: "Clinical Inquiries & Appointments",
+                      gradient: "from-purple-500 to-pink-400",
+                    },
+                  ].map((detail, index) => (
+                    <div key={index} className="flex items-start space-x-4 group">
+                      <div
+                        className={`w-12 h-12 bg-gradient-to-r ${detail.gradient} rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg flex-shrink-0`}
+                      >
+                        {detail.icon}
+                      </div>
+                      <div className="space-y-1">
+                        <div className="text-sm font-medium text-gray-400">{detail.label}</div>
+                        <div className="text-white font-light">{detail.value}</div>
+                        <div className="text-gray-400 font-light text-sm">{detail.subtext}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-6">
+                  <a
+                    href="https://maps.google.com/?q=123+Medical+Plaza+Healthcare+District+Karachi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-white font-light"
+                  >
+                    <MapPin className="h-4 w-4" />
+                    <span>Get Directions</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -843,20 +970,11 @@ export default function PhysiogenFit() {
                         desc: "State-of-the-art rehabilitation and assessment center",
                         href: "https://maps.google.com/?q=123+Medical+Plaza+Healthcare+District",
                       },
-                    ].map((contact) => (
+                    ].map((contact, index) => (
                       <a
-                        key={contact.label}
+                        key={index}
                         href={contact.href}
                         className="group text-center p-8 rounded-2xl transition-all duration-300 hover:bg-gray-800/90 hover:shadow-lg cursor-pointer backdrop-blur-sm block border border-gray-700/30"
-                        onClick={() => {
-                          if (contact.href.startsWith('tel:')) {
-                            trackPhoneClick(contact.value, contact.label)
-                          } else if (contact.href.startsWith('mailto:')) {
-                            trackEmailClick(contact.value, contact.label)
-                          } else {
-                            trackButtonClick(contact.label, "contact-section")
-                          }
-                        }}
                       >
                         <div
                           className={`w-16 h-16 bg-gradient-to-r ${contact.gradient} rounded-2xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-lg mx-auto mb-6`}
@@ -905,10 +1023,11 @@ export default function PhysiogenFit() {
                 "Treatment Protocol",
                 "Clinical Team",
                 "Case Studies",
+                "Location",
                 "Consultation",
                 "Privacy Policy",
                 "Terms of Service",
-              ].map((item) => (
+              ].map((item, index) => (
                 <Link
                   key={item}
                   href={`#${item.toLowerCase().replace(" ", "-")}`}
