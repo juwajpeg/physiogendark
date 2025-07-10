@@ -16,7 +16,6 @@ import {
   Heart,
   Shield,
   Calendar,
-  ArrowRight,
   Star,
   Users,
   Award,
