@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { initDataLayer, trackButtonClick, trackPhoneClick, trackEmailClick, trackScrollDepth } from "@/lib/gtm"
 import {
   Menu,
   X,
@@ -40,6 +41,9 @@ export default function PhysiogenFit() {
   const [headerVisible, setHeaderVisible] = useState(true)
 
   useEffect(() => {
+    // Initialize GTM data layer
+    initDataLayer()
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       setScrollY(currentScrollY)
@@ -67,6 +71,12 @@ export default function PhysiogenFit() {
           setActiveSection(index)
         }
       })
+
+      // Track scroll depth
+      const scrollPercentage = Math.round((currentScrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100)
+      if (scrollPercentage % 25 === 0 && scrollPercentage > 0) {
+        trackScrollDepth(scrollPercentage)
+      }
     }
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -340,7 +350,7 @@ export default function PhysiogenFit() {
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887">
+              <a href="tel:00923137818887" onClick={() => trackPhoneClick("+92 313 7818887", "header")}>
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm">
                   Schedule Assessment
                 </Button>
@@ -375,7 +385,7 @@ export default function PhysiogenFit() {
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887" className="block">
+              <a href="tel:00923137818887" className="block" onClick={() => trackPhoneClick("+92 313 7818887", "mobile-menu")}>
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm">
                   Schedule Assessment
                 </Button>
@@ -440,7 +450,7 @@ export default function PhysiogenFit() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="tel:00923137818887" className="w-full sm:w-auto flex justify-center">
+                <a href="tel:00923137818887" className="w-full sm:w-auto flex justify-center" onClick={() => trackButtonClick("Schedule Clinical Assessment", "hero-section")}>
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
@@ -845,6 +855,15 @@ export default function PhysiogenFit() {
                         key={contact.label}
                         href={contact.href}
                         className="group text-center p-8 rounded-2xl transition-all duration-300 hover:bg-gray-800/90 hover:shadow-lg cursor-pointer backdrop-blur-sm block border border-gray-700/30"
+                        onClick={() => {
+                          if (contact.href.startsWith('tel:')) {
+                            trackPhoneClick(contact.value, contact.label)
+                          } else if (contact.href.startsWith('mailto:')) {
+                            trackEmailClick(contact.value, contact.label)
+                          } else {
+                            trackButtonClick(contact.label, "contact-section")
+                          }
+                        }}
                       >
                         <div
                           className={`w-16 h-16 bg-gradient-to-r ${contact.gradient} rounded-2xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-lg mx-auto mb-6`}
