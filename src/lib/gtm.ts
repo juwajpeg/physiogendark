@@ -1,7 +1,7 @@
 declare global {
   interface Window {
-    dataLayer: any[]
-    gtag: (...args: any[]) => void
+    dataLayer: Record<string, unknown>[]
+    gtag: (...args: unknown[]) => void
   }
 }
 
@@ -13,7 +13,7 @@ export const initDataLayer = () => {
 }
 
 // Push to data layer
-export const pushToDataLayer = (data: any) => {
+export const pushToDataLayer = (data: Record<string, unknown>) => {
   if (typeof window !== 'undefined') {
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push(data)
@@ -30,7 +30,7 @@ export const trackPageView = (url: string) => {
 }
 
 // Track custom events
-export const trackEvent = (eventName: string, parameters: Record<string, any> = {}) => {
+export const trackEvent = (eventName: string, parameters: Record<string, unknown> = {}) => {
   pushToDataLayer({
     event: eventName,
     ...parameters,
@@ -38,7 +38,7 @@ export const trackEvent = (eventName: string, parameters: Record<string, any> = 
 }
 
 // Track form submissions
-export const trackFormSubmission = (formName: string, formData?: Record<string, any>) => {
+export const trackFormSubmission = (formName: string, formData?: Record<string, unknown>) => {
   trackEvent('form_submit', {
     form_name: formName,
     ...formData,
