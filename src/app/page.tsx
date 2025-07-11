@@ -567,10 +567,7 @@ export default function PhysiogenFit() {
                         ))}
                       </div>
 
-                      <div className="flex items-center text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2 pl-22">
-                        <span className="text-sm font-light">Review Clinical Protocol</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </div>
+
                     </div>
                   </CardContent>
                 </Card>
@@ -832,7 +829,7 @@ export default function PhysiogenFit() {
               <div className="relative">
                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.2!2d67.0!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDUxJzM4LjUiTiA2N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2s!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.8223532205843!2d74.18339907602493!3d31.363881074286063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3918ff652783aa4f%3A0x45021e950cf121fd!2sPhysiogen!5e0!3m2!1sen!2s!4v1752233570667!5m2!1sen!2s"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -874,7 +871,7 @@ export default function PhysiogenFit() {
                     {
                       icon: <Mail className="h-5 w-5" />,
                       label: "Email",
-                      value: "clinical@physiogen.fit",
+                      value: "contact@physiogen.fit",
                       subtext: "Clinical Inquiries & Appointments",
                       gradient: "from-purple-500 to-pink-400",
                     },
@@ -957,10 +954,10 @@ export default function PhysiogenFit() {
                       {
                         icon: <Mail className="h-5 w-5" />,
                         label: "Clinical Inquiries",
-                        value: "clinical@physiogen.fit",
+                        value: "contact@physiogen.fit",
                         gradient: "from-green-500 to-emerald-400",
                         desc: "Comprehensive clinical information and resources",
-                        href: "mailto:clinical@physiogen.fit",
+                        href: "mailto:contact@physiogen.fit",
                       },
                       {
                         icon: <MapPin className="h-5 w-5" />,
