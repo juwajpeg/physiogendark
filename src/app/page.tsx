@@ -28,6 +28,10 @@ import {
   Dna,
   Stethoscope,
   Globe,
+  MessageCircle,
+  Droplets,
+  Circle,
+  Dot,
 } from "lucide-react"
 
 export default function PhysiogenFit() {
@@ -106,7 +110,7 @@ export default function PhysiogenFit() {
       modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Functional Movement Training", "Sensory Integration Techniques"],
     },
     {
-      icon: <Zap className="h-6 w-6" />,
+      icon: <TrendingUp className="h-6 w-6" />,
       title: "Sports and Athletic Performance",
       desc: "Sport-specific conditioning and biomechanical optimization to maximize performance, improve efficiency, and reduce injury risk.",
       gradient: "from-green-500 to-emerald-400",
@@ -128,7 +132,7 @@ export default function PhysiogenFit() {
     },
     {
       icon: <Target className="h-6 w-6" />,
-      title: "Dry Needling/Acupuncture",
+      title: "Dry Needling",
       desc: "Precision-based interventions to address pain, muscle dysfunction, and energy flow through targeted needle therapy.",
       gradient: "from-indigo-500 to-purple-400",
       modalities: ["Trigger Point Dry Needling", "Acupuncture for Pain Management", "Neuromuscular Stimulation Techniques"],
@@ -289,8 +293,8 @@ export default function PhysiogenFit() {
             {[...Array(20)].map((_, i) => (
               <circle
                 key={i}
-                cx={Math.random() * 400}
-                cy={Math.random() * 200}
+                cx={20 + (i * 19) % 380}
+                cy={10 + (i * 9.5) % 180}
                 r="3"
                 fill="currentColor"
                 opacity="0.6"
@@ -299,10 +303,10 @@ export default function PhysiogenFit() {
             {[...Array(15)].map((_, i) => (
               <line
                 key={i}
-                x1={Math.random() * 400}
-                y1={Math.random() * 200}
-                x2={Math.random() * 400}
-                y2={Math.random() * 200}
+                x1={25 + (i * 25) % 375}
+                y1={15 + (i * 12) % 185}
+                x2={50 + (i * 23) % 350}
+                y2={20 + (i * 10) % 180}
                 stroke="currentColor"
                 strokeWidth="1"
                 opacity="0.3"
@@ -489,8 +493,8 @@ export default function PhysiogenFit() {
                     className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <Calendar className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
-                    Book appointment through WhatsApp
+                    <MessageCircle className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                    Appointment
                   </Button>
                 </a>
               </div>
