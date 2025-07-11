@@ -164,19 +164,21 @@ export default function PhysiogenFit() {
       gradient: "from-green-500 to-blue-500",
     },
     {
-      name: "Dr. Emily Watson, PhD, RD",
-      role: "Integrative Wellness Director",
-      specialty: "Clinical Nutrition & Metabolic Health",
-      credentials: "Registered Dietitian & Exercise Physiologist",
+      name: "Dr. Bisma Khan, DPT",
+      role: "Outpatient Physiotherapy Specialist",
+      specialty: "Women’s Health | Pediatric Physical Therapy",
+      credentials: "Clinical Rehabilitation & Movement Science",
       gradient: "from-purple-500 to-pink-500",
       image: "/Bisma.svg",
+      tagline: "Restoring Function with Compassionate Care",
     },
     {
-      name: "Dr. Michael Thompson, DPT, OCS",
-      role: "Sports Medicine Specialist",
-      specialty: "Athletic Performance & Injury Prevention",
-      credentials: "Orthopedic Clinical Specialist & Sports Physical Therapy",
+      name: "Dr. Muhammad Mubarak Janjua, PT, MSSPT",
+      role: "Founder & CEO – Physiogen",
+      specialty: "Sports & Orthopedic Physiotherapy | OPD Rehabilitation",
+      credentials: "HCPC (UK) Licensed | Bronze Medalist",
       gradient: "from-orange-500 to-red-500",
+      tagline: "Optimizing Athletic Performance and Recovery through Movement, Psychology, and Lifestyle Science",
     },
   ]
 
@@ -716,6 +718,9 @@ export default function PhysiogenFit() {
                           <Stethoscope className="h-3 w-3" />
                           <span>{clinician.credentials}</span>
                         </div>
+                        {clinician.tagline && (
+                          <div className="text-pink-300 font-light text-xs mt-2">{clinician.tagline}</div>
+                        )}
                       </div>
                     </div>
                   </CardContent>
