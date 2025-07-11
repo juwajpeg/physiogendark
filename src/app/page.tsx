@@ -94,30 +94,51 @@ export default function PhysiogenFit() {
     {
       icon: <Activity className="h-6 w-6" />,
       title: "Musculoskeletal Rehabilitation",
-      desc: "Evidence-based therapeutic interventions utilizing advanced biomechanical assessment and neuromuscular re-education protocols",
+      desc: "Targeted interventions to restore function and alleviate pain through evidence-based biomechanical and neuromuscular strategies.",
       gradient: "from-blue-500 to-cyan-400",
-      modalities: ["Manual Therapy Techniques", "Therapeutic Exercise Prescription", "Functional Movement Analysis"],
+      modalities: ["Joint Mobilization and Manipulation", "Corrective Exercise Programming", "Postural and Gait Analysis"],
+    },
+    {
+      icon: <Brain className="h-6 w-6" />,
+      title: "Neurological and Pediatric Rehabilitation",
+      desc: "Specialized protocols to enhance motor function and developmental outcomes in neurological and pediatric conditions using tailored neuroplasticity-focused approaches.",
+      gradient: "from-purple-500 to-pink-400",
+      modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Functional Movement Training", "Sensory Integration Techniques"],
     },
     {
       icon: <Zap className="h-6 w-6" />,
-      title: "Athletic Performance Optimization",
-      desc: "Comprehensive biomechanical analysis and sport-specific conditioning protocols designed to enhance neuromuscular efficiency",
-      gradient: "from-purple-500 to-pink-400",
-      modalities: ["Plyometric Training Protocols", "Movement Pattern Optimization", "Performance Metrics Analysis"],
+      title: "Sports and Athletic Performance",
+      desc: "Sport-specific conditioning and biomechanical optimization to maximize performance, improve efficiency, and reduce injury risk.",
+      gradient: "from-green-500 to-emerald-400",
+      modalities: ["Sport-Specific Strength and Conditioning", "Biomechanical Movement Analysis", "Agility and Power Training Protocols"],
+    },
+    {
+      icon: <Users className="h-6 w-6" />,
+      title: "Occupational Therapy",
+      desc: "Functional interventions to improve daily living skills and workplace ergonomics, promoting independence and productivity.",
+      gradient: "from-orange-500 to-red-400",
+      modalities: ["Activities of Daily Living (ADL) Training", "Ergonomic Assessments and Modifications", "Adaptive Equipment Training"],
     },
     {
       icon: <Heart className="h-6 w-6" />,
-      title: "Integrative Wellness Medicine",
-      desc: "Holistic therapeutic approach incorporating physiological assessment, nutritional biochemistry, and lifestyle modification strategies",
-      gradient: "from-green-500 to-emerald-400",
-      modalities: ["Metabolic Assessment", "Stress Physiology Management", "Circadian Rhythm Optimization"],
+      title: "Hijama/Cupping Therapy",
+      desc: "Traditional therapeutic techniques to enhance circulation, relieve muscle tension, and promote tissue recovery.",
+      gradient: "from-red-500 to-pink-400",
+      modalities: ["Wet and Dry Cupping Applications", "Myofascial Release Integration", "Pain and Stress Relief Protocols"],
+    },
+    {
+      icon: <Target className="h-6 w-6" />,
+      title: "Dry Needling/Acupuncture",
+      desc: "Precision-based interventions to address pain, muscle dysfunction, and energy flow through targeted needle therapy.",
+      gradient: "from-indigo-500 to-purple-400",
+      modalities: ["Trigger Point Dry Needling", "Acupuncture for Pain Management", "Neuromuscular Stimulation Techniques"],
     },
     {
       icon: <Shield className="h-6 w-6" />,
-      title: "Preventive Biomechanics",
-      desc: "Systematic movement screening and risk stratification protocols utilizing advanced kinematic analysis methodologies",
-      gradient: "from-orange-500 to-red-400",
-      modalities: ["Functional Movement Screening", "Injury Risk Assessment", "Prophylactic Exercise Protocols"],
+      title: "Nutrition and Wellness",
+      desc: "Holistic nutritional strategies and lifestyle interventions to optimize health, support recovery, and enhance overall well-being.",
+      gradient: "from-teal-500 to-cyan-400",
+      modalities: ["Personalized Nutritional Assessments", "Dietary Supplementation Guidance", "Lifestyle and Wellness Coaching"],
     },
   ]
 
@@ -535,7 +556,7 @@ export default function PhysiogenFit() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {clinicalServices.map((service, index) => (
                 <Card
                   key={index}
