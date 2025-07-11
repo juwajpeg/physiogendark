@@ -384,7 +384,7 @@ export default function PhysiogenFit() {
                 "Case Studies",
                 "Location",
                 "Consultation",
-              ].map((item, index) => (
+              ].map((item) => (
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -878,8 +878,8 @@ export default function PhysiogenFit() {
                       subtext: "Clinical Inquiries & Appointments",
                       gradient: "from-purple-500 to-pink-400",
                     },
-                  ].map((detail, index) => (
-                    <div key={index} className="flex items-start space-x-4 group">
+                  ].map((detail) => (
+                    <div key={detail.label} className="flex items-start space-x-4 group">
                       <div
                         className={`w-12 h-12 bg-gradient-to-r ${detail.gradient} rounded-xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 shadow-lg flex-shrink-0`}
                       >
