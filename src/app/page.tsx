@@ -169,6 +169,7 @@ export default function PhysiogenFit() {
       specialty: "Clinical Nutrition & Metabolic Health",
       credentials: "Registered Dietitian & Exercise Physiologist",
       gradient: "from-purple-500 to-pink-500",
+      image: "/bisma.svg",
     },
     {
       name: "Dr. Michael Thompson, DPT, OCS",
@@ -684,11 +685,19 @@ export default function PhysiogenFit() {
                   />
                   <CardContent className="p-8 text-center space-y-6 relative z-10">
                     <div className="relative">
-                      <div
-                        className={`w-28 h-28 bg-gradient-to-r ${clinician.gradient} rounded-full mx-auto transition-all duration-300 group-hover:scale-110 flex items-center justify-center text-white text-2xl font-light shadow-lg`}
-                      >
-                        {clinician.name.split(" ")[0].charAt(0) + clinician.name.split(" ")[1].charAt(0)}
-                      </div>
+                      {clinician.image ? (
+                        <img
+                          src={clinician.image}
+                          alt={clinician.name}
+                          className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white shadow-lg group-hover:scale-110 transition-all duration-300"
+                        />
+                      ) : (
+                        <div
+                          className={`w-28 h-28 bg-gradient-to-r ${clinician.gradient} rounded-full mx-auto transition-all duration-300 group-hover:scale-110 flex items-center justify-center text-white text-2xl font-light shadow-lg`}
+                        >
+                          {clinician.name.split(" ")[0].charAt(0) + clinician.name.split(" ")[1].charAt(0)}
+                        </div>
+                      )}
                       <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-600">
                         <Award className="h-5 w-5 text-yellow-400" />
                       </div>
