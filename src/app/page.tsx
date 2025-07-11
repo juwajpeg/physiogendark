@@ -169,7 +169,7 @@ export default function PhysiogenFit() {
       specialty: "Clinical Nutrition & Metabolic Health",
       credentials: "Registered Dietitian & Exercise Physiologist",
       gradient: "from-purple-500 to-pink-500",
-      image: "/bisma.svg",
+      image: "/Bisma.svg",
     },
     {
       name: "Dr. Michael Thompson, DPT, OCS",
