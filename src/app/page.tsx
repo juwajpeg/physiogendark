@@ -857,8 +857,8 @@ export default function PhysiogenFit() {
                     {
                       icon: <MapPin className="h-5 w-5" />,
                       label: "Address",
-                      value: "123 Medical Plaza, Healthcare District",
-                      subtext: "Karachi, Pakistan",
+                      value: "35, Iqbal, Block Commercial FF Bahria Town",
+                      subtext: "Lahore, Punjab, Pakistan",
                       gradient: "from-green-500 to-emerald-400",
                     },
                     {
@@ -893,7 +893,7 @@ export default function PhysiogenFit() {
 
                 <div className="pt-6">
                   <a
-                    href="https://maps.google.com/?q=123+Medical+Plaza+Healthcare+District+Karachi"
+                    href="https://maps.app.goo.gl/5rAeDDyEprsv5TUs8"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-white font-light"
@@ -962,10 +962,10 @@ export default function PhysiogenFit() {
                       {
                         icon: <MapPin className="h-5 w-5" />,
                         label: "Clinical Facility",
-                        value: "123 Medical Plaza, Healthcare District",
+                        value: "35, Iqbal, Block Commercial FF Bahria Town",
                         gradient: "from-purple-500 to-pink-400",
                         desc: "State-of-the-art rehabilitation and assessment center",
-                        href: "https://maps.google.com/?q=123+Medical+Plaza+Healthcare+District",
+                        href: "https://maps.app.goo.gl/5rAeDDyEprsv5TUs8",
                       },
                     ].map((contact) => (
                       <a
