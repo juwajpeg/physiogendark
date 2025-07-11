@@ -11,7 +11,6 @@ import {
   Mail,
   MapPin,
   Activity,
-  Zap,
   Heart,
   Shield,
   Calendar,
@@ -29,9 +28,6 @@ import {
   Stethoscope,
   Globe,
   MessageCircle,
-  Droplets,
-  Circle,
-  Dot,
 } from "lucide-react"
 
 export default function PhysiogenFit() {
