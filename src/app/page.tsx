@@ -145,27 +145,27 @@ export default function PhysiogenFit() {
   const clinicalPathway = [
     {
       step: "01",
-      title: "Comprehensive Assessment",
-      desc: "Systematic evaluation utilizing validated assessment tools, biomechanical analysis, and physiological screening protocols",
-      icon: <Target className="h-6 w-6" />,
+      title: "Appointment",
+      desc: "Schedule a visit to start your personalized care journey.",
+      icon: <Calendar className="h-6 w-6" />,
     },
     {
       step: "02",
-      title: "Treatment Protocol Development",
-      desc: "Evidence-based intervention strategies formulated through clinical reasoning and therapeutic goal establishment",
-      icon: <Brain className="h-6 w-6" />,
+      title: "Consultation & Assessment",
+      desc: "Thorough evaluation with a physical exam and validated tools to understand your needs.",
+      icon: <Target className="h-6 w-6" />,
     },
     {
       step: "03",
-      title: "Therapeutic Implementation",
-      desc: "Progressive intervention delivery with continuous monitoring, outcome measurement, and protocol modification",
-      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Treatment & Exercise Therapy",
+      desc: "Customized treatment plans with targeted therapies and exercises designed for you.",
+      icon: <Activity className="h-6 w-6" />,
     },
     {
       step: "04",
-      title: "Outcome Optimization",
-      desc: "Sustained functional improvement through maintenance protocols and long-term health behavior modification",
-      icon: <Sparkles className="h-6 w-6" />,
+      title: "Outcome Monitoring",
+      desc: "Ongoing tracking and adjustments to ensure lasting improvements and healthy habits.",
+      icon: <TrendingUp className="h-6 w-6" />,
     },
   ]
 
@@ -626,8 +626,7 @@ export default function PhysiogenFit() {
               </div>
               <h2 className="text-5xl font-extralight text-white mb-6">Treatment Protocol Framework</h2>
               <p className="text-xl text-gray-300 font-light max-w-4xl mx-auto">
-                A systematic, evidence-based clinical pathway utilizing validated assessment tools, progressive
-                intervention strategies, and continuous outcome monitoring to ensure optimal therapeutic results.
+                We use a simple, evidence-based process to help you achieve optimal health outcomes.
               </p>
             </div>
 
