@@ -230,11 +230,11 @@ export default function PhysiogenFit() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 overflow-x-hidden relative">
+    <div className="min-h-screen bg-black overflow-x-hidden relative">
       {/* Scientific Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* DNA Helix Pattern */}
-        <div className="absolute top-20 right-10 opacity-10">
+        <div className="absolute top-20 right-10 opacity-5">
           <svg width="200" height="400" viewBox="0 0 200 400" className="text-blue-400">
             <path
               d="M50 0 Q100 50 50 100 Q0 150 50 200 Q100 250 50 300 Q0 350 50 400"
@@ -264,7 +264,7 @@ export default function PhysiogenFit() {
         </div>
 
         {/* Molecular Structure */}
-        <div className="absolute bottom-20 left-10 opacity-10">
+        <div className="absolute bottom-20 left-10 opacity-5">
           <svg width="300" height="300" viewBox="0 0 300 300" className="text-green-400">
             <circle cx="150" cy="150" r="8" fill="currentColor" />
             <circle cx="100" cy="100" r="6" fill="currentColor" />
@@ -283,7 +283,7 @@ export default function PhysiogenFit() {
         </div>
 
         {/* Neural Network Pattern */}
-        <div className="absolute top-1/2 left-1/4 opacity-10">
+        <div className="absolute top-1/2 left-1/4 opacity-5">
           <svg width="400" height="200" viewBox="0 0 400 200" className="text-purple-400">
             {[...Array(20)].map((_, i) => (
               <circle
@@ -311,7 +311,7 @@ export default function PhysiogenFit() {
         </div>
 
         {/* Anatomical Grid */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-3">
           <svg width="100%" height="100%" className="text-gray-600">
             <defs>
               <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -325,9 +325,9 @@ export default function PhysiogenFit() {
 
       {/* Dynamic Gradient Overlay */}
       <div
-        className="fixed inset-0 opacity-20 pointer-events-none transition-all duration-1000 z-10"
+        className="fixed inset-0 opacity-10 pointer-events-none transition-all duration-1000 z-10"
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.3), transparent 50%)`,
+          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.2), transparent 50%)`,
         }}
       />
 
@@ -341,7 +341,7 @@ export default function PhysiogenFit() {
 
       {/* Header */}
       <header
-        className={`fixed top-0 w-full bg-gray-900/90 backdrop-blur-xl z-40 transition-all duration-500 border-b border-gray-700/50 ${
+        className={`fixed top-0 w-full bg-black/90 backdrop-blur-xl z-40 transition-all duration-500 border-b border-gray-800/50 ${
           headerVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -430,7 +430,7 @@ export default function PhysiogenFit() {
 
       {/* Hero Section */}
       <section id="home" className="pt-20 min-h-screen flex items-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900/80" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Scientific Elements */}
         <div className="absolute inset-0 opacity-10">
@@ -527,10 +527,10 @@ export default function PhysiogenFit() {
 
       {/* Clinical Services Section */}
       <section id="clinical-services" className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800/80 via-gray-850 to-gray-800" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Medical Icons */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20">
             <Activity className="h-20 w-20 text-blue-400" />
           </div>
@@ -559,7 +559,7 @@ export default function PhysiogenFit() {
               {clinicalServices.map((service, index) => (
                 <Card
                   key={index}
-                  className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
+                  className="group border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50"
                 >
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500`}
@@ -602,10 +602,10 @@ export default function PhysiogenFit() {
 
       {/* Treatment Protocol Section */}
       <section id="treatment-protocol" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 via-purple-900/40 to-green-900/40" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Scientific Pattern */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <svg width="100%" height="100%" className="text-blue-400">
             <defs>
               <pattern id="hexagon" width="60" height="52" patternUnits="userSpaceOnUse">
@@ -643,7 +643,7 @@ export default function PhysiogenFit() {
                     <div className="hidden md:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 z-0" />
                   )}
 
-                  <div className="relative z-10 text-center space-y-6 p-8 rounded-3xl transition-all duration-500 hover:bg-gray-800/90 hover:shadow-xl backdrop-blur-sm border border-gray-700/30">
+                  <div className="relative z-10 text-center space-y-6 p-8 rounded-3xl transition-all duration-500 hover:bg-gray-900/90 hover:shadow-xl backdrop-blur-sm border border-gray-800/30">
                     <div className="relative">
                       <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mx-auto transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 shadow-lg">
                         {phase.icon}
@@ -669,10 +669,10 @@ export default function PhysiogenFit() {
 
       {/* Clinical Team Section */}
       <section id="clinical-team" className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800 via-purple-900/20 to-gray-800" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Medical Symbols */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-1/4 right-1/4">
             <Award className="h-28 w-28 text-yellow-400" />
           </div>
@@ -699,7 +699,7 @@ export default function PhysiogenFit() {
               {clinicalTeam.map((clinician, index) => (
                 <Card
                   key={index}
-                  className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
+                  className="group border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50"
                 >
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${clinician.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500`}
@@ -719,7 +719,7 @@ export default function PhysiogenFit() {
                           {clinician.name.split(" ")[0].charAt(0) + clinician.name.split(" ")[1].charAt(0)}
                         </div>
                       )}
-                      <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-600">
+                      <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-lg border border-gray-700">
                         <Award className="h-5 w-5 text-yellow-400" />
                       </div>
                     </div>
@@ -733,7 +733,7 @@ export default function PhysiogenFit() {
                       </div>
                       <div className="space-y-2">
                         <p className="text-gray-300 font-light text-sm">{clinician.specialty}</p>
-                        <div className="inline-flex items-center space-x-2 bg-gray-700 px-3 py-1 rounded-full text-xs text-gray-300">
+                        <div className="inline-flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded-full text-xs text-gray-300">
                           <Stethoscope className="h-3 w-3" />
                           <span>{clinician.credentials}</span>
                         </div>
@@ -752,10 +752,10 @@ export default function PhysiogenFit() {
 
       {/* Case Studies Section */}
       <section id="case-studies" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 via-gray-800 to-blue-900/60" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Research Elements */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-1/4">
             <TrendingUp className="h-24 w-24 text-green-400" />
           </div>
@@ -782,7 +782,7 @@ export default function PhysiogenFit() {
               {clinicalOutcomes.map((study, index) => (
                 <Card
                   key={index}
-                  className="group border-0 bg-gray-800/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-700/50"
+                  className="group border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                   <CardContent className="p-8 space-y-6 relative z-10">
@@ -814,7 +814,7 @@ export default function PhysiogenFit() {
                         </div>
                       </div>
 
-                      <div className="pt-4 border-t border-gray-700">
+                      <div className="pt-4 border-t border-gray-800">
                         <div className="inline-flex items-center space-x-2 bg-green-500/20 px-3 py-1 rounded-full text-xs text-green-300 border border-green-500/30">
                           <CheckCircle className="h-3 w-3" />
                           <span>{study.timeframe}</span>
@@ -831,10 +831,10 @@ export default function PhysiogenFit() {
 
       {/* Map Section */}
       <section id="location" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 via-gray-800 to-green-900/60" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Location Elements */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-1/4">
             <MapPin className="h-24 w-24 text-green-400" />
           </div>
@@ -860,7 +860,7 @@ export default function PhysiogenFit() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Map Container */}
               <div className="relative">
-                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50 bg-gray-800">
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-800/50 bg-gray-900">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.8223532205843!2d74.18339907602493!3d31.363881074286063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3918ff652783aa4f%3A0x45021e950cf121fd!2sPhysiogen!5e0!3m2!1sen!2s!4v1752233570667!5m2!1sen!2s"
                     width="100%"
@@ -944,10 +944,10 @@ export default function PhysiogenFit() {
 
       {/* Consultation Section */}
       <section id="consultation" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-green-900/40" />
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Medical Equipment */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-1/4 left-1/4">
             <Microscope className="h-32 w-32 text-blue-400" />
           </div>
@@ -1027,11 +1027,11 @@ export default function PhysiogenFit() {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden border-t border-gray-700/50">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 to-purple-900/95" />
+      <footer className="py-20 bg-black text-white relative overflow-hidden border-t border-gray-800/50">
+        <div className="absolute inset-0 bg-black" />
 
         {/* Background Scientific Elements */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 right-20">
             <Dna className="h-20 w-20 text-white" />
           </div>
