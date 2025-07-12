@@ -19,7 +19,6 @@ import {
   Users,
   Award,
   CheckCircle,
-  Sparkles,
   Target,
   TrendingUp,
   Brain,
