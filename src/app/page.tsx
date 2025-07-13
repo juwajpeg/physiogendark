@@ -341,22 +341,26 @@ export default function PhysiogenFit() {
 
       {/* Header */}
       <header
-        className={`fixed top-0 w-full bg-black/90 backdrop-blur-xl z-40 transition-all duration-500 border-b border-gray-800/50 ${
-          headerVisible ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-4 left-4 right-4 mx-auto max-w-7xl bg-black/20 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl ${
+          headerVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
+        style={{
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+          animation: headerVisible ? 'float 6s ease-in-out infinite' : 'none',
+        }}
       >
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
-          <div className="flex items-center justify-between h-20">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between h-16">
             <Link
               href="#home"
               className="text-xl font-light text-white transition-all duration-300 hover:text-blue-400 relative group"
             >
-              Physiogen
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Physiogen</span>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-12 ml-auto">
+            <nav className="hidden md:flex items-center space-x-8 ml-auto">
               {[
                 "Clinical Services",
                 "Treatment Protocol",
@@ -368,17 +372,17 @@ export default function PhysiogenFit() {
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
-                    className={`text-gray-300 hover:text-blue-400 transition-all duration-300 font-light relative group text-sm ${
-                      activeSection === index + 1 ? "text-blue-400" : ""
+                    className={`text-gray-200 hover:text-white transition-all duration-300 font-light relative group text-sm px-3 py-2 rounded-lg hover:bg-white/10 ${
+                      activeSection === index + 1 ? "text-white bg-white/20" : ""
                     }`}
                   >
                     {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ),
               )}
               <a href="tel:00923137818887">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm">
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm shadow-lg">
                   Schedule Assessment
                 </Button>
               </a>
@@ -386,7 +390,7 @@ export default function PhysiogenFit() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 transition-transform duration-300 hover:scale-110 text-white"
+              className="md:hidden p-2 transition-transform duration-300 hover:scale-110 text-white hover:bg-white/10 rounded-lg"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <div className={`transition-all duration-300 ${isMenuOpen ? "rotate-180" : ""}`}>
@@ -411,7 +415,7 @@ export default function PhysiogenFit() {
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
-                    className="block text-gray-300 hover:text-blue-400 transition-all duration-300 font-light transform hover:translate-x-2 text-sm"
+                    className="block text-gray-200 hover:text-white transition-all duration-300 font-light transform hover:translate-x-2 text-sm px-3 py-2 rounded-lg hover:bg-white/10"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item}
@@ -419,7 +423,7 @@ export default function PhysiogenFit() {
                 ),
               )}
               <a href="tel:00923137818887" className="block">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm">
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm shadow-lg">
                   Schedule Assessment
                 </Button>
               </a>
@@ -429,7 +433,7 @@ export default function PhysiogenFit() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 min-h-screen flex items-center relative overflow-hidden">
+      <section id="home" className="pt-32 min-h-screen flex items-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black" />
 
         {/* Background Scientific Elements */}
