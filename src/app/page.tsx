@@ -44,16 +44,8 @@ export default function PhysiogenFit() {
       const currentScrollY = window.scrollY
       setScrollY(currentScrollY)
 
-      // Hide/show header on mobile based on scroll direction
-      if (window.innerWidth < 768) {
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          setHeaderVisible(false)
-        } else {
-          setHeaderVisible(true)
-        }
-      } else {
-        setHeaderVisible(true)
-      }
+      // Keep header visible on all devices for floating effect
+      setHeaderVisible(true)
 
       setLastScrollY(currentScrollY)
 
@@ -341,7 +333,7 @@ export default function PhysiogenFit() {
 
       {/* Header */}
       <header
-        className={`fixed top-4 left-4 right-4 mx-auto max-w-7xl bg-black/20 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl ${
+        className={`fixed top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 mx-auto max-w-7xl bg-black/30 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl ${
           headerVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
         style={{
@@ -390,7 +382,7 @@ export default function PhysiogenFit() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 transition-transform duration-300 hover:scale-110 text-white hover:bg-white/10 rounded-lg"
+              className="md:hidden p-3 transition-transform duration-300 hover:scale-110 text-white hover:bg-white/20 rounded-xl bg-white/10 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <div className={`transition-all duration-300 ${isMenuOpen ? "rotate-180" : ""}`}>
@@ -403,7 +395,7 @@ export default function PhysiogenFit() {
           <div
             className={`md:hidden transition-all duration-500 ease-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} overflow-hidden`}
           >
-            <nav className="py-6 space-y-4">
+            <nav className="py-4 space-y-3 bg-black/20 backdrop-blur-sm rounded-xl mx-2 mb-2 p-4">
               {[
                 "Clinical Services",
                 "Treatment Protocol",
@@ -415,15 +407,15 @@ export default function PhysiogenFit() {
                   <Link
                     key={item}
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
-                    className="block text-gray-200 hover:text-white transition-all duration-300 font-light transform hover:translate-x-2 text-sm px-3 py-2 rounded-lg hover:bg-white/10"
+                    className="block text-gray-200 hover:text-white transition-all duration-300 font-light transform hover:translate-x-2 text-sm px-4 py-3 rounded-lg hover:bg-white/20 active:bg-white/30"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item}
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887" className="block">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm shadow-lg">
+              <a href="tel:00923137818887" className="block mt-4">
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-sm shadow-lg py-3">
                   Schedule Assessment
                 </Button>
               </a>
@@ -433,7 +425,7 @@ export default function PhysiogenFit() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 min-h-screen flex items-center relative overflow-hidden">
+      <section id="home" className="pt-24 md:pt-32 min-h-screen flex items-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black" />
 
         {/* Background Scientific Elements */}
