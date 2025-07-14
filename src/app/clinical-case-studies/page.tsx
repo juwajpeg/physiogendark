@@ -536,7 +536,7 @@ export default function CaseStudiesPage() {
               className="flex items-center space-x-3 text-white transition-all duration-300 hover:text-blue-400 group"
             >
               <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" />
-              <span className="text-lg md:text-xl font-light">
+              <span className="text-lg md:text-xl font-light hidden md:inline">
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Physiogen
                 </span>
@@ -664,7 +664,7 @@ export default function CaseStudiesPage() {
               >
                 {/* Case Study Header */}
                 <div className="text-center mb-16">
-                  <div className="inline-flex items-center space-x-3 mb-6">
+                  <div className="inline-flex items-center space-x-6 mb-6">
                     <div
                       className={`w-16 h-16 bg-gradient-to-r ${study.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg`}
                     >
@@ -673,7 +673,7 @@ export default function CaseStudiesPage() {
                         return <Icon className="h-6 w-6" />;
                       })()}
                     </div>
-                    <div className="text-left">
+                    <div className="text-left pl-2">
                       <div className="text-sm text-gray-400 font-light">Case Study {study.id}</div>
                       <h2 className="text-3xl font-light text-white">{study.title}</h2>
                     </div>
