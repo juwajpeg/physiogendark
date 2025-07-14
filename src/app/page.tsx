@@ -367,7 +367,7 @@ export default function PhysiogenFit() {
               ].map((item, index) => (
                   <Link
                     key={item}
-                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "Case Studies" ? "/clinical-case-studies" : `#${item.toLowerCase().replace(" ", "-")}`}
                     className={`text-gray-200 hover:text-white transition-all duration-300 font-light relative group text-sm md:text-base px-2 md:px-3 py-1 md:py-2 rounded-lg hover:bg-white/10 ${
                       activeSection === index + 1 ? "text-white bg-white/20" : ""
                     }`}
@@ -408,7 +408,7 @@ export default function PhysiogenFit() {
               ].map((item) => (
                   <Link
                     key={item}
-                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "Case Studies" ? "/clinical-case-studies" : `#${item.toLowerCase().replace(" ", "-")}`}
                     className="block text-gray-200 hover:text-white transition-all duration-300 font-light transform hover:translate-x-2 text-sm md:text-base px-4 py-3 rounded-lg hover:bg-white/20 active:bg-white/30"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -822,6 +822,14 @@ export default function PhysiogenFit() {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+            <div className="pt-6 flex justify-center">
+              <Link href="/clinical-case-studies" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-white font-light">
+                <Star className="h-4 w-4" />
+                <span>View All Case Studies</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
