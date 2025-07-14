@@ -25,23 +25,19 @@ import {
 } from "lucide-react"
 
 export default function CaseStudiesPage() {
-  const [scrollY, setScrollY] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const [activeCase, setActiveCase] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
-    window.addEventListener("scroll", handleScroll)
     window.addEventListener("mousemove", handleMouseMove)
     setIsVisible(true)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("mousemove", handleMouseMove)
     }
   }, [])
@@ -449,8 +445,6 @@ export default function CaseStudiesPage() {
     MapPin,
     BarChart3,
   };
-
-  type IconKey = keyof typeof iconMap;
 
   const researchMetrics = [
     { label: "Total Cases Documented", value: "2,847", icon: "FileText" },
