@@ -121,7 +121,7 @@ export default function CaseStudiesPage() {
       },
       followUp: "12-month follow-up: No re-injury, maintained performance level, continued professional career",
       gradient: "from-blue-500 to-cyan-400",
-      icon: <Activity className="h-6 w-6" />,
+      icon: "Activity",
     },
     {
       id: "CS002",
@@ -198,7 +198,7 @@ export default function CaseStudiesPage() {
       followUp:
         "18-month follow-up: Maintained functional gains, successful school integration, improved quality of life measures",
       gradient: "from-purple-500 to-pink-400",
-      icon: <Brain className="h-6 w-6" />,
+      icon: "Brain",
     },
     {
       id: "CS003",
@@ -275,7 +275,7 @@ export default function CaseStudiesPage() {
       followUp:
         "6-month follow-up: No recurrence of symptoms, maintained functional improvements, successful return to full work duties",
       gradient: "from-green-500 to-emerald-400",
-      icon: <Target className="h-6 w-6" />,
+      icon: "Target",
     },
     {
       id: "CS004",
@@ -352,7 +352,7 @@ export default function CaseStudiesPage() {
       followUp:
         "12-month follow-up: Continued functional improvements, successful return to modified work duties, maintained independence in ADLs",
       gradient: "from-orange-500 to-red-400",
-      icon: <Brain className="h-6 w-6" />,
+      icon: "Brain",
     },
     {
       id: "CS005",
@@ -429,15 +429,34 @@ export default function CaseStudiesPage() {
       followUp:
         "Season follow-up: Achieved career-high ranking, no significant injuries, maintained performance improvements",
       gradient: "from-indigo-500 to-purple-400",
-      icon: <TrendingUp className="h-6 w-6" />,
+      icon: "TrendingUp",
     },
   ]
 
+  const iconMap = {
+    Activity,
+    Brain,
+    Target,
+    TrendingUp,
+    FileText,
+    Star,
+    Microscope,
+    Calendar,
+    Clock,
+    Stethoscope,
+    MessageCircle,
+    Phone,
+    MapPin,
+    BarChart3,
+  };
+
+  type IconKey = keyof typeof iconMap;
+
   const researchMetrics = [
-    { label: "Total Cases Documented", value: "2,847", icon: <FileText className="h-5 w-5" /> },
-    { label: "Average Treatment Success Rate", value: "94.2%", icon: <TrendingUp className="h-5 w-5" /> },
-    { label: "Patient Satisfaction Score", value: "9.6/10", icon: <Star className="h-5 w-5" /> },
-    { label: "Research Publications", value: "23", icon: <Microscope className="h-5 w-5" /> },
+    { label: "Total Cases Documented", value: "2,847", icon: "FileText" },
+    { label: "Average Treatment Success Rate", value: "94.2%", icon: "TrendingUp" },
+    { label: "Patient Satisfaction Score", value: "9.6/10", icon: "Star" },
+    { label: "Research Publications", value: "23", icon: "Microscope" },
   ]
 
   return (
@@ -586,26 +605,29 @@ export default function CaseStudiesPage() {
 
               {/* Research Metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 max-w-5xl mx-auto">
-                {researchMetrics.map((metric, index) => (
-                  <div
-                    key={index}
-                    className="text-center transition-all duration-500 ease-out hover:scale-110 group cursor-pointer"
-                    style={{
-                      animationDelay: `${index * 200 + 800}ms`,
-                      transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                      opacity: isVisible ? 1 : 0,
-                      transition: `all 0.6s ease-out ${index * 200 + 800}ms`,
-                    }}
-                  >
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                      {metric.icon}
+                {researchMetrics.map((metric, index) => {
+                  const Icon = iconMap[metric.icon as keyof typeof iconMap];
+                  return (
+                    <div
+                      key={index}
+                      className="text-center transition-all duration-500 ease-out hover:scale-110 group cursor-pointer"
+                      style={{
+                        animationDelay: `${index * 200 + 800}ms`,
+                        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                        opacity: isVisible ? 1 : 0,
+                        transition: `all 0.6s ease-out ${index * 200 + 800}ms`,
+                      }}
+                    >
+                      <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white mx-auto mb-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="text-2xl font-light bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-110">
+                        {metric.value}
+                      </div>
+                      <div className="text-gray-400 font-light text-sm mt-2">{metric.label}</div>
                     </div>
-                    <div className="text-2xl font-light bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-110">
-                      {metric.value}
-                    </div>
-                    <div className="text-gray-400 font-light text-sm mt-2">{metric.label}</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -652,7 +674,10 @@ export default function CaseStudiesPage() {
                     <div
                       className={`w-16 h-16 bg-gradient-to-r ${study.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg`}
                     >
-                      {study.icon}
+                      {(() => {
+                        const Icon = iconMap[study.icon as keyof typeof iconMap];
+                        return <Icon className="h-6 w-6" />;
+                      })()}
                     </div>
                     <div className="text-left">
                       <div className="text-sm text-gray-400 font-light">Case Study {study.id}</div>
