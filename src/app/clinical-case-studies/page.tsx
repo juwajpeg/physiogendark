@@ -30,6 +30,27 @@ import {
   X,
 } from "lucide-react"
 
+// Interface for database case studies (simplified version)
+interface DatabaseCaseStudy {
+  id: string
+  title: string
+  patient: {
+    gender: string
+    age: number
+    condition: string
+    duration: string
+  }
+  specialty: string
+  outcome: string
+  successRate: number
+  treatmentType: string
+  dateCompleted: Date
+  therapist: string
+  metrics: {
+    satisfactionScore: string
+  }
+}
+
 // Mock data generator for demonstration
 const generateMockCaseStudies = (count: number) => {
   const conditions = [
@@ -107,7 +128,7 @@ export default function CaseStudiesPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(20)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [selectedCase, setSelectedCase] = useState<string | null>(null)
+  const [_selectedCase, setSelectedCase] = useState<string | null>(null)
 
   // Search and filtering
   const [searchTerm, setSearchTerm] = useState("")
@@ -234,7 +255,7 @@ export default function CaseStudiesPage() {
     }
   }
 
-  const CaseCard = ({ caseStudy }: { caseStudy: any }) => (
+  const CaseCard = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
     <Link href={`/clinical-case-studies/${caseStudy.id}`} passHref legacyBehavior>
       <a style={{ textDecoration: 'none' }}>
         <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
@@ -297,7 +318,7 @@ export default function CaseStudiesPage() {
     </Link>
   )
 
-  const CaseListItem = ({ caseStudy }: { caseStudy: any }) => (
+  const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
     <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group">
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
@@ -585,7 +606,7 @@ export default function CaseStudiesPage() {
                         <span className="text-sm text-gray-400">Sort by:</span>
                         <select
                           value={sortBy}
-                          onChange={(e) => setSortBy(e.target.value as any)}
+                          onChange={(e) => setSortBy(e.target.value as "date" | "outcome" | "success" | "duration")}
                           className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded text-white text-sm focus:outline-none focus:border-blue-500"
                         >
                           <option value="date">Date</option>
