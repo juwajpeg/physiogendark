@@ -235,42 +235,42 @@ export default function CaseStudiesPage() {
     <Link href={`/clinical-case-studies/${caseStudy.id}`} passHref legacyBehavior>
       <a style={{ textDecoration: 'none' }}>
         <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2 sm:pb-3 px-4 sm:px-6">
             <div className="flex items-start justify-between">
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <div className="text-xs text-gray-400 mb-1">{caseStudy.id}</div>
                 <h3 className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                   {caseStudy.title}
                 </h3>
               </div>
-              <div className={`px-2 py-1 rounded-full text-xs font-medium ${getOutcomeColor(caseStudy.outcome)}`}>
+              <div className={`px-2 py-1 rounded-full text-xs font-medium ml-2 flex-shrink-0 ${getOutcomeColor(caseStudy.outcome)}`}>
                 {caseStudy.outcome}
               </div>
             </div>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-3 text-xs">
+          <CardContent className="pt-0 px-4 sm:px-6">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs">
                 <div>
                   <span className="text-gray-400">Patient:</span>
-                  <div className="text-gray-200">
+                  <div className="text-gray-200 truncate">
                     {caseStudy.patient.gender}, {caseStudy.patient.age}y
                   </div>
                 </div>
                 <div>
                   <span className="text-gray-400">Duration:</span>
-                  <div className="text-gray-200">{caseStudy.patient.duration}</div>
+                  <div className="text-gray-200 truncate">{caseStudy.patient.duration}</div>
                 </div>
               </div>
 
               <div className="text-xs">
                 <span className="text-gray-400">Condition:</span>
-                <div className="text-gray-200 font-medium">{caseStudy.patient.condition}</div>
+                <div className="text-gray-200 font-medium line-clamp-2">{caseStudy.patient.condition}</div>
               </div>
 
               <div className="text-xs">
                 <span className="text-gray-400">Specialty:</span>
-                <span className="text-blue-400 ml-1">{caseStudy.specialty}</span>
+                <span className="text-blue-400 ml-1 truncate block">{caseStudy.specialty}</span>
               </div>
 
               <div className="flex items-center justify-between pt-2 border-t border-gray-800">
@@ -296,25 +296,25 @@ export default function CaseStudiesPage() {
 
   const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
     <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group">
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 grid grid-cols-6 gap-4 items-center">
-            <div>
+      <CardContent className="p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 items-start sm:items-center">
+            <div className="sm:col-span-1">
               <div className="text-xs text-gray-400">{caseStudy.id}</div>
-              <div className="text-sm text-white font-medium truncate">{caseStudy.title}</div>
+              <div className="text-sm text-white font-medium line-clamp-2 sm:truncate">{caseStudy.title}</div>
             </div>
-            <div className="text-sm text-gray-200">{caseStudy.patient.condition}</div>
-            <div className="text-sm text-blue-400">{caseStudy.specialty}</div>
+            <div className="text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-1">{caseStudy.patient.condition}</div>
+            <div className="text-xs sm:text-sm text-blue-400 truncate">{caseStudy.specialty}</div>
             <div className={`px-2 py-1 rounded-full text-xs font-medium w-fit ${getOutcomeColor(caseStudy.outcome)}`}>
               {caseStudy.outcome}
             </div>
-            <div className="text-sm text-green-400 font-medium">{caseStudy.successRate}%</div>
+            <div className="text-xs sm:text-sm text-green-400 font-medium">{caseStudy.successRate}%</div>
             <div className="text-xs text-gray-400">{caseStudy.dateCompleted.toLocaleDateString()}</div>
           </div>
           <Button
             size="sm"
             variant="ghost"
-            className="ml-4 text-blue-400 hover:text-blue-300"
+            className="self-end sm:self-center text-blue-400 hover:text-blue-300"
             onClick={() => setSelectedCase(caseStudy.id)}
           >
             <Eye className="h-4 w-4" />
@@ -369,23 +369,13 @@ export default function CaseStudiesPage() {
                 </span>
               </span>
             </Link>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-300 font-light">Clinical Database</span>
-              <div className="flex items-center space-x-2">
-                <Button size="sm" variant="ghost" className="text-gray-400 hover:text-white">
-                  <Upload className="h-4 w-4 mr-2" />
-                  Import
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <span className="text-gray-300 font-light text-sm sm:text-base hidden sm:block">Clinical Database</span>
+              <a href="tel:00923137818887">
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-3 sm:px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 text-xs sm:text-sm">
+                  Schedule Assessment
                 </Button>
-                <Button size="sm" variant="ghost" className="text-gray-400 hover:text-white">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
-                </Button>
-                <a href="tel:00923137818887">
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105">
-                    Schedule Assessment
-                  </Button>
-                </a>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -420,45 +410,45 @@ export default function CaseStudiesPage() {
               </div>
 
               {/* Statistics Dashboard */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                <div className="text-center p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                    <FileText className="h-6 w-6" />
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-5xl mx-auto">
+                <div className="text-center p-3 sm:p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3">
+                    <FileText className="h-4 w-4 sm:h-6 sm:w-6" />
                   </div>
-                  <div className="text-2xl font-light bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  <div className="text-lg sm:text-2xl font-light bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     {stats.total.toLocaleString()}
                   </div>
-                  <div className="text-gray-400 font-light text-sm">Total Cases</div>
+                  <div className="text-gray-400 font-light text-xs sm:text-sm">Total Cases</div>
                 </div>
 
-                <div className="text-center p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                    <TrendingUp className="h-6 w-6" />
+                <div className="text-center p-3 sm:p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3">
+                    <TrendingUp className="h-4 w-4 sm:h-6 sm:w-6" />
                   </div>
-                  <div className="text-2xl font-light bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                  <div className="text-lg sm:text-2xl font-light bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                     {stats.avgSuccess}%
                   </div>
-                  <div className="text-gray-400 font-light text-sm">Avg Success Rate</div>
+                  <div className="text-gray-400 font-light text-xs sm:text-sm">Avg Success Rate</div>
                 </div>
 
-                <div className="text-center p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
-                  <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                    <Star className="h-6 w-6" />
+                <div className="text-center p-3 sm:p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3">
+                    <Star className="h-4 w-4 sm:h-6 sm:w-6" />
                   </div>
-                  <div className="text-2xl font-light bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                  <div className="text-lg sm:text-2xl font-light bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
                     {stats.avgSatisfaction}/10
                   </div>
-                  <div className="text-gray-400 font-light text-sm">Patient Satisfaction</div>
+                  <div className="text-gray-400 font-light text-xs sm:text-sm">Patient Satisfaction</div>
                 </div>
 
-                <div className="text-center p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white mx-auto mb-3">
-                    <Award className="h-6 w-6" />
+                <div className="text-center p-3 sm:p-6 bg-gray-900/50 rounded-2xl border border-gray-800/50">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3">
+                    <Award className="h-4 w-4 sm:h-6 sm:w-6" />
                   </div>
-                  <div className="text-2xl font-light bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <div className="text-lg sm:text-2xl font-light bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     {stats.excellentRate}%
                   </div>
-                  <div className="text-gray-400 font-light text-sm">Excellent Outcomes</div>
+                  <div className="text-gray-400 font-light text-xs sm:text-sm">Excellent Outcomes</div>
                 </div>
               </div>
             </div>
@@ -474,7 +464,7 @@ export default function CaseStudiesPage() {
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {/* Search Bar */}
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
                     <div className="flex-1 relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                       <input
@@ -482,13 +472,13 @@ export default function CaseStudiesPage() {
                         placeholder="Search cases by ID, condition, therapist, or keywords..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors text-sm sm:text-base"
                       />
                     </div>
                     <Button
                       onClick={() => setShowFilters(!showFilters)}
                       variant="outline"
-                      className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
+                      className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-4 py-3 sm:py-2"
                     >
                       <Filter className="h-4 w-4 mr-2" />
                       Filters
@@ -500,7 +490,7 @@ export default function CaseStudiesPage() {
 
                   {/* Advanced Filters */}
                   {showFilters && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 pt-4 border-t border-gray-800">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 pt-4 border-t border-gray-800">
                       <select
                         value={filters.specialty}
                         onChange={(e) => setFilters((prev) => ({ ...prev, specialty: e.target.value }))}
@@ -576,14 +566,14 @@ export default function CaseStudiesPage() {
                   )}
 
                   {/* Sort and View Controls */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                    <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between pt-4 border-t border-gray-800 space-y-3 sm:space-y-0">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-400">Sort by:</span>
+                        <span className="text-xs sm:text-sm text-gray-400">Sort by:</span>
                         <select
                           value={sortBy}
                           onChange={(e) => setSortBy(e.target.value as "date" | "outcome" | "success" | "duration")}
-                          className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded text-white text-sm focus:outline-none focus:border-blue-500"
+                          className="px-2 sm:px-3 py-1 bg-gray-800/50 border border-gray-700 rounded text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500"
                         >
                           <option value="date">Date</option>
                           <option value="outcome">Outcome</option>
@@ -594,18 +584,18 @@ export default function CaseStudiesPage() {
                           size="sm"
                           variant="ghost"
                           onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                          className="text-gray-400 hover:text-white"
+                          className="text-gray-400 hover:text-white p-1"
                         >
                           {sortOrder === "asc" ? <SortAsc className="h-4 w-4" /> : <SortDesc className="h-4 w-4" />}
                         </Button>
                       </div>
 
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-400">Show:</span>
+                        <span className="text-xs sm:text-sm text-gray-400">Show:</span>
                         <select
                           value={itemsPerPage}
                           onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                          className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded text-white text-sm focus:outline-none focus:border-blue-500"
+                          className="px-2 sm:px-3 py-1 bg-gray-800/50 border border-gray-700 rounded text-white text-xs sm:text-sm focus:outline-none focus:border-blue-500"
                         >
                           <option value={20}>20</option>
                           <option value={50}>50</option>
@@ -615,18 +605,18 @@ export default function CaseStudiesPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-400">
+                    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                      <span className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
                         {((currentPage - 1) * itemsPerPage + 1).toLocaleString()} -{" "}
                         {Math.min(currentPage * itemsPerPage, filteredCases.length).toLocaleString()} of{" "}
                         {filteredCases.length.toLocaleString()}
                       </span>
-                      <div className="flex items-center space-x-1 ml-4">
+                      <div className="flex items-center space-x-1">
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => setViewMode("grid")}
-                          className={`${viewMode === "grid" ? "text-blue-400" : "text-gray-400"} hover:text-white`}
+                          className={`${viewMode === "grid" ? "text-blue-400" : "text-gray-400"} hover:text-white p-1`}
                         >
                           <Grid className="h-4 w-4" />
                         </Button>
@@ -634,7 +624,7 @@ export default function CaseStudiesPage() {
                           size="sm"
                           variant="ghost"
                           onClick={() => setViewMode("list")}
-                          className={`${viewMode === "list" ? "text-blue-400" : "text-gray-400"} hover:text-white`}
+                          className={`${viewMode === "list" ? "text-blue-400" : "text-gray-400"} hover:text-white p-1`}
                         >
                           <List className="h-4 w-4" />
                         </Button>
@@ -647,7 +637,7 @@ export default function CaseStudiesPage() {
 
             {/* Results */}
             {viewMode === "grid" ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-8">
                 {paginatedCases.map((caseStudy) => (
                   <CaseCard key={caseStudy.id} caseStudy={caseStudy} />
                 ))}
@@ -656,14 +646,14 @@ export default function CaseStudiesPage() {
               <div className="space-y-3 mb-8">
                 {/* List Header */}
                 <Card className="border-0 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
-                  <CardContent className="p-4">
-                    <div className="grid grid-cols-6 gap-4 text-sm font-medium text-gray-400">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 text-xs sm:text-sm font-medium text-gray-400">
                       <div>Case ID / Title</div>
-                      <div>Condition</div>
-                      <div>Specialty</div>
-                      <div>Outcome</div>
-                      <div>Success Rate</div>
-                      <div>Date</div>
+                      <div className="hidden sm:block">Condition</div>
+                      <div className="hidden sm:block">Specialty</div>
+                      <div className="hidden sm:block">Outcome</div>
+                      <div className="hidden sm:block">Success Rate</div>
+                      <div className="hidden sm:block">Date</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -675,13 +665,13 @@ export default function CaseStudiesPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center space-x-2">
+              <div className="flex items-center justify-center space-x-1 sm:space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
+                  className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50 px-2 sm:px-3"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -690,19 +680,19 @@ export default function CaseStudiesPage() {
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                   const pageNum = Math.max(1, Math.min(totalPages - 4, currentPage - 2)) + i
                   return (
-                    <Button
-                      key={pageNum}
-                      variant={currentPage === pageNum ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setCurrentPage(pageNum)}
-                      className={
-                        currentPage === pageNum
-                          ? "bg-blue-500 text-white"
-                          : "border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
-                      }
-                    >
-                      {pageNum}
-                    </Button>
+                                         <Button
+                       key={pageNum}
+                       variant={currentPage === pageNum ? "default" : "outline"}
+                       size="sm"
+                       onClick={() => setCurrentPage(pageNum)}
+                       className={
+                         currentPage === pageNum
+                           ? "bg-blue-500 text-white px-2 sm:px-3"
+                           : "border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-2 sm:px-3"
+                       }
+                     >
+                       {pageNum}
+                     </Button>
                   )
                 })}
 
@@ -711,7 +701,7 @@ export default function CaseStudiesPage() {
                   size="sm"
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
+                  className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50 px-2 sm:px-3"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -743,7 +733,7 @@ export default function CaseStudiesPage() {
                 rehabilitation science and improving patient outcomes worldwide.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <a
                   href="https://wa.me/923137818887"
                   target="_blank"
@@ -752,10 +742,10 @@ export default function CaseStudiesPage() {
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
+                    className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-base sm:text-lg px-8 sm:px-12 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <MessageCircle className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                    <MessageCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:rotate-12" />
                     Schedule Clinical Assessment
                   </Button>
                 </a>
@@ -764,9 +754,9 @@ export default function CaseStudiesPage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto bg-transparent"
+                    className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white text-base sm:text-lg px-8 sm:px-12 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto bg-transparent"
                   >
-                    <Phone className="mr-2 h-5 w-5" />
+                    <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     Call Now
                   </Button>
                 </a>
