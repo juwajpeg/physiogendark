@@ -17,15 +17,96 @@ import {
   MessageCircle,
   BarChart3,
   Stethoscope,
-  User,
-  MapPin,
   FileText,
   Download,
   Share2,
+  User,
+  MapPin,
 } from "lucide-react"
 
+// TypeScript interfaces for case study data
+interface PatientInfo {
+  demographics: string;
+  condition: string;
+  duration: string;
+  surgicalDetails?: string;
+  medicalHistory?: string;
+}
+
+interface ClinicalPresentation {
+  initialAssessment: string[];
+  functionalLimitations: string[];
+  diagnosticImaging?: string[];
+}
+
+interface TreatmentPhase {
+  title: string;
+  duration?: string;
+  frequency?: string;
+  interventions: string[];
+  goals: string;
+  milestones?: string[];
+}
+
+interface TreatmentProtocol {
+  [phase: string]: TreatmentPhase;
+}
+
+interface FunctionalTest {
+  test: string;
+  baseline: string;
+  week8?: string;
+  week12?: string;
+  outcome: string;
+}
+
+interface ClinicalMetric {
+  metric: string;
+  baseline: string;
+  week4?: string;
+  week8?: string;
+  week12?: string;
+  week16?: string;
+  outcome: string;
+}
+
+interface ClinicalOutcomes {
+  functionalTests: FunctionalTest[];
+  clinicalMetrics: ClinicalMetric[];
+  complications?: string[];
+}
+
+type FollowUp =
+  | string
+  | {
+      shortTerm: string;
+      mediumTerm: string;
+      longTerm: string;
+      additionalNotes?: string;
+    };
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  patient: PatientInfo;
+  clinicalPresentation: ClinicalPresentation;
+  treatmentProtocol: TreatmentProtocol;
+  clinicalOutcomes: ClinicalOutcomes;
+  followUp: FollowUp;
+  gradient: string;
+  icon: React.ElementType;
+  specialty: string;
+  therapist: string;
+  assistingStaff?: string[];
+  dateCompleted: string;
+  surgicalDate?: string;
+  successRate: number;
+  evidenceBase?: string[];
+  keyLearnings?: string[];
+}
+
 // Comprehensive detailed case studies data
-const detailedCaseStudies: { [key: string]: any } = {
+const detailedCaseStudies: { [key: string]: CaseStudy } = {
   CS000001: {
     id: "CS000001",
     title: "Post-Surgical ACL Reconstruction Recovery",
@@ -340,7 +421,7 @@ const detailedCaseStudies: { [key: string]: any } = {
 export default function CaseStudyDetailPage({ params }: { params: { id: string } }) {
   const [isVisible, setIsVisible] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [caseStudy, setCaseStudy] = useState<any>(null)
+  const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -581,7 +662,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                       <span>Initial Clinical Assessment</span>
                     </h2>
                     <div className="space-y-3">
-                      {caseStudy.clinicalPresentation.initialAssessment.map((finding: string, idx: number) => (
+                      {caseStudy.clinicalPresentation.initialAssessment.map((finding, idx) => (
                         <div key={idx} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0" />
                           <span className="text-gray-300 font-light text-sm">{finding}</span>
@@ -598,7 +679,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                       <span>Functional Limitations</span>
                     </h2>
                     <div className="space-y-3">
-                      {caseStudy.clinicalPresentation.functionalLimitations.map((limitation: string, idx: number) => (
+                      {caseStudy.clinicalPresentation.functionalLimitations.map((limitation, idx) => (
                         <div key={idx} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
                           <span className="text-gray-300 font-light text-sm">{limitation}</span>
@@ -617,14 +698,14 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                     <span>Evidence-Based Treatment Protocol</span>
                   </h2>
                   <div className="grid md:grid-cols-3 gap-8">
-                    {Object.entries(caseStudy.treatmentProtocol).map(([phaseKey, phase]: [string, any]) => (
+                    {Object.entries(caseStudy.treatmentProtocol).map(([phaseKey, phase]) => (
                       <div key={phaseKey} className="space-y-4">
                         <div className="text-center">
                           <h3 className="text-lg font-light text-white mb-2">{phase.title}</h3>
                           <p className="text-gray-400 font-light text-sm mb-4">{phase.goals}</p>
                         </div>
                         <div className="space-y-3">
-                          {phase.interventions.map((intervention: string, idx: number) => (
+                          {phase.interventions.map((intervention, idx) => (
                             <div key={idx} className="flex items-start space-x-3">
                               <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
                               <span className="text-gray-300 font-light text-sm">{intervention}</span>
@@ -646,7 +727,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                       <span>Functional Test Results</span>
                     </h2>
                     <div className="space-y-4">
-                      {caseStudy.clinicalOutcomes.functionalTests.map((test: any, idx: number) => (
+                      {caseStudy.clinicalOutcomes.functionalTests.map((test, idx) => (
                         <div key={idx} className="space-y-2">
                           <div className="flex justify-between items-center">
                             <span className="text-gray-200 font-light text-sm">{test.test}</span>
@@ -674,7 +755,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                       <span>Clinical Metrics</span>
                     </h2>
                     <div className="space-y-4">
-                      {caseStudy.clinicalOutcomes.clinicalMetrics.map((metric: any, idx: number) => (
+                      {caseStudy.clinicalOutcomes.clinicalMetrics.map((metric, idx) => (
                         <div key={idx} className="space-y-2">
                           <div className="flex justify-between items-center">
                             <span className="text-gray-200 font-light text-sm">{metric.metric}</span>
@@ -723,7 +804,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                           <span>Evidence Base</span>
                         </h2>
                         <div className="space-y-3">
-                          {caseStudy.evidenceBase?.map((evidence: string, idx: number) => (
+                          {caseStudy.evidenceBase?.map((evidence, idx) => (
                             <div key={idx} className="flex items-start space-x-3">
                               <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                               <span className="text-gray-300 font-light text-sm">{evidence}</span>
@@ -740,7 +821,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                           <span>Key Clinical Learnings</span>
                         </h2>
                         <div className="space-y-3">
-                          {caseStudy.keyLearnings?.map((learning: string, idx: number) => (
+                          {caseStudy.keyLearnings?.map((learning, idx) => (
                             <div key={idx} className="flex items-start space-x-3">
                               <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                               <span className="text-gray-300 font-light text-sm">{learning}</span>
@@ -760,7 +841,7 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                           <span>Complications & Management</span>
                         </h2>
                         <div className="space-y-3">
-                          {caseStudy.clinicalOutcomes.complications.map((complication: string, idx: number) => (
+                          {caseStudy.clinicalOutcomes.complications.map((complication, idx) => (
                             <div key={idx} className="flex items-start space-x-3">
                               <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
                               <span className="text-gray-300 font-light text-sm">{complication}</span>
@@ -778,26 +859,28 @@ export default function CaseStudyDetailPage({ params }: { params: { id: string }
                         <Calendar className="h-5 w-5 text-purple-400" />
                         <span>Comprehensive Follow-up Timeline</span>
                       </h2>
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-400 mb-2">Short-term (6 weeks)</h3>
-                          <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.shortTerm}</p>
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-400 mb-2">Medium-term (3 months)</h3>
-                          <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.mediumTerm}</p>
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-400 mb-2">Long-term (12 months)</h3>
-                          <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.longTerm}</p>
-                        </div>
-                        {caseStudy.followUp.additionalNotes && (
+                      {typeof caseStudy.followUp === "object" && caseStudy.followUp !== null ? (
+                        <div className="space-y-4">
                           <div>
-                            <h3 className="text-sm font-medium text-gray-400 mb-2">Additional Notes</h3>
-                            <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.additionalNotes}</p>
+                            <h3 className="text-sm font-medium text-gray-400 mb-2">Short-term (6 weeks)</h3>
+                            <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.shortTerm}</p>
                           </div>
-                        )}
-                      </div>
+                          <div>
+                            <h3 className="text-sm font-medium text-gray-400 mb-2">Medium-term (3 months)</h3>
+                            <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.mediumTerm}</p>
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-medium text-gray-400 mb-2">Long-term (12 months)</h3>
+                            <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.longTerm}</p>
+                          </div>
+                          {caseStudy.followUp.additionalNotes && (
+                            <div>
+                              <h3 className="text-sm font-medium text-gray-400 mb-2">Additional Notes</h3>
+                              <p className="text-gray-300 font-light text-sm">{caseStudy.followUp.additionalNotes}</p>
+                            </div>
+                          )}
+                        </div>
+                      ) : null}
                     </CardContent>
                   </Card>
                 </>
