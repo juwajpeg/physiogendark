@@ -471,35 +471,27 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
       />
 
       {/* Header */}
-      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-7xl bg-black/30 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
+      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-7xl bg-black/50 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/20 shadow-2xl mx-4">
+        <div className="px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between h-12 sm:h-16">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <Link
                 href="/clinical-case-studies"
-                className="flex items-center space-x-3 text-white transition-all duration-300 hover:text-blue-400 group"
+                className="flex items-center space-x-2 sm:space-x-3 text-white transition-all duration-300 hover:text-blue-400 group"
               >
-                <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" />
-                <span className="text-xl font-light">
+                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:-translate-x-1" />
+                <span className="text-sm sm:text-xl font-light">
                   <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Back to Database
                   </span>
                 </span>
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-300 font-light">{caseStudy.id}</span>
-              <div className="flex items-center space-x-2">
-                <Button size="sm" variant="ghost" className="text-gray-400 hover:text-white">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
-                </Button>
-                <Button size="sm" variant="ghost" className="text-gray-400 hover:text-white">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <span className="text-gray-300 font-light text-xs sm:text-sm hidden sm:block">{caseStudy.id}</span>
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 <a href="tel:00923137818887">
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-6 py-2 rounded-full transition-all duration-300 hover:scale-105">
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-3 sm:px-6 py-1 sm:py-2 rounded-full transition-all duration-300 hover:scale-105 text-xs sm:text-sm">
                     Schedule Assessment
                   </Button>
                 </a>
@@ -510,8 +502,8 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
       </header>
 
       {/* Case Study Content */}
-      <section className="pt-32 pb-32 relative">
-        <div className="container mx-auto px-8 relative z-20">
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-32 relative">
+        <div className="container mx-auto px-4 sm:px-8 relative z-20">
           <div className="max-w-6xl mx-auto">
             <div
               className={`transition-all duration-1000 ease-out ${
@@ -519,23 +511,23 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               }`}
             >
               {/* Case Study Header */}
-              <div className="text-center mb-16">
-                <div className="inline-flex items-center space-x-6 mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-6">
                   <div
-                    className={`w-20 h-20 bg-gradient-to-r ${caseStudy.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg`}
+                    className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${caseStudy.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg`}
                   >
-                    <IconComponent className="h-8 w-8" />
+                    <IconComponent className="h-6 w-6 sm:h-8 sm:w-8" />
                   </div>
-                  <div className="text-left">
-                    <div className="text-sm text-gray-400 font-light mb-1">Case Study {caseStudy.id}</div>
-                    <h1 className="text-4xl font-light text-white mb-2">{caseStudy.title}</h1>
-                    <div className="flex items-center space-x-4 text-sm text-gray-300 mb-2">
+                  <div className="text-center sm:text-left">
+                    <div className="text-xs sm:text-sm text-gray-400 font-light mb-1">Case Study {caseStudy.id}</div>
+                    <h1 className="text-2xl sm:text-4xl font-light text-white mb-2 leading-tight">{caseStudy.title}</h1>
+                    <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm text-gray-300 mb-2">
                       <span>{caseStudy.specialty}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{caseStudy.therapist}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{caseStudy.dateCompleted}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span className="text-green-400 font-medium">{caseStudy.successRate}% Success Rate</span>
                     </div>
                     {caseStudy.assistingStaff && (
@@ -548,13 +540,13 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               </div>
 
               {/* Patient Information */}
-              <Card className="mb-12 border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-light text-white mb-6 flex items-center space-x-3">
-                    <User className="h-6 w-6 text-blue-400" />
-                    <span>Patient Demographics & Condition</span>
-                  </h2>
-                  <div className="grid md:grid-cols-3 gap-6">
+              <Card className="mb-12 border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                                  <CardContent className="p-6 sm:p-8">
+                    <h2 className="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                      <User className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
+                      <span>Patient Demographics & Condition</span>
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                     <div>
                       <h3 className="text-sm font-medium text-gray-400 mb-2">Demographics</h3>
                       <p className="text-gray-200 font-light">{caseStudy.patient.demographics}</p>
@@ -572,8 +564,8 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               </Card>
 
               {/* Clinical Presentation */}
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+                <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
                   <CardContent className="p-8">
                     <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
                       <Stethoscope className="h-5 w-5 text-red-400" />
@@ -590,10 +582,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                  <CardContent className="p-8">
-                    <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                      <Target className="h-5 w-5 text-orange-400" />
+                <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                  <CardContent className="p-6 sm:p-8">
+                    <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                      <Target className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
                       <span>Functional Limitations</span>
                     </h2>
                     <div className="space-y-3">
@@ -609,13 +601,13 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               </div>
 
               {/* Treatment Protocol */}
-              <Card className="mb-12 border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-light text-white mb-8 flex items-center space-x-3">
-                    <Activity className="h-6 w-6 text-green-400" />
+              <Card className="mb-12 border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                <CardContent className="p-6 sm:p-8">
+                  <h2 className="text-xl sm:text-2xl font-light text-white mb-6 sm:mb-8 flex items-center space-x-3">
+                    <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-green-400" />
                     <span>Evidence-Based Treatment Protocol</span>
                   </h2>
-                  <div className="grid md:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                     {Object.entries(caseStudy.treatmentProtocol).map(([phaseKey, phase]) => (
                       <div key={phaseKey} className="space-y-4">
                         <div className="text-center">
@@ -637,11 +629,11 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               </Card>
 
               {/* Clinical Outcomes */}
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                  <CardContent className="p-8">
-                    <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                      <BarChart3 className="h-5 w-5 text-blue-400" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+                <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                  <CardContent className="p-6 sm:p-8">
+                    <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                      <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                       <span>Functional Test Results</span>
                     </h2>
                     <div className="space-y-4">
@@ -666,10 +658,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                  <CardContent className="p-8">
-                    <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                      <TrendingUp className="h-5 w-5 text-green-400" />
+                <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                  <CardContent className="p-6 sm:p-8">
+                    <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                      <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                       <span>Clinical Metrics</span>
                     </h2>
                     <div className="space-y-4">
@@ -696,10 +688,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               </div>
 
               {/* Follow-up Results */}
-              <Card className="mb-12 border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                <CardContent className="p-8">
-                  <h2 className="text-xl font-light text-white mb-4 flex items-center space-x-3">
-                    <Clock className="h-5 w-5 text-purple-400" />
+              <Card className="mb-12 border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                <CardContent className="p-6 sm:p-8">
+                  <h2 className="text-lg sm:text-xl font-light text-white mb-4 flex items-center space-x-3">
+                    <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
                     <span>Long-term Follow-up</span>
                   </h2>
                   {typeof caseStudy.followUp === "string" && (
@@ -711,11 +703,11 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
               {/* Evidence Base & Key Learnings - Only show for CS000001 */}
               {caseStudy.id === "CS000001" && (
                 <>
-                  <div className="grid md:grid-cols-2 gap-8 mb-12">
-                    <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                      <CardContent className="p-8">
-                        <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                          <FileText className="h-5 w-5 text-blue-400" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+                    <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                      <CardContent className="p-6 sm:p-8">
+                        <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                          <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                           <span>Evidence Base</span>
                         </h2>
                         <div className="space-y-3">
@@ -729,10 +721,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
                       </CardContent>
                     </Card>
 
-                    <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                      <CardContent className="p-8">
-                        <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                          <Brain className="h-5 w-5 text-green-400" />
+                    <Card className="border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                      <CardContent className="p-6 sm:p-8">
+                        <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                          <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                           <span>Key Clinical Learnings</span>
                         </h2>
                         <div className="space-y-3">
@@ -749,10 +741,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
 
                   {/* Complications & Management */}
                   {caseStudy.clinicalOutcomes.complications && (
-                    <Card className="mb-12 border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                      <CardContent className="p-8">
-                        <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                          <Target className="h-5 w-5 text-yellow-400" />
+                    <Card className="mb-12 border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                      <CardContent className="p-6 sm:p-8">
+                        <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                          <Target className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400" />
                           <span>Complications & Management</span>
                         </h2>
                         <div className="space-y-3">
@@ -768,10 +760,10 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
                   )}
 
                   {/* Detailed Follow-up */}
-                  <Card className="mb-12 border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50">
-                    <CardContent className="p-8">
-                      <h2 className="text-xl font-light text-white mb-6 flex items-center space-x-3">
-                        <Calendar className="h-5 w-5 text-purple-400" />
+                  <Card className="mb-12 border-0 bg-gray-800/95 backdrop-blur-sm border border-gray-700/60 shadow-xl">
+                    <CardContent className="p-6 sm:p-8">
+                      <h2 className="text-lg sm:text-xl font-light text-white mb-4 sm:mb-6 flex items-center space-x-3">
+                        <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
                         <span>Comprehensive Follow-up Timeline</span>
                       </h2>
                       {typeof caseStudy.followUp === "object" && caseStudy.followUp !== null ? (
