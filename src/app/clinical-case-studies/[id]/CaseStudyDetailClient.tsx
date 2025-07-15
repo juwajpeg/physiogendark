@@ -487,13 +487,6 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
               <span className="text-gray-300 font-light text-xs sm:text-sm hidden sm:block">{caseStudy.id}</span>
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <a href="tel:00923137818887">
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-3 sm:px-6 py-1 sm:py-2 rounded-full transition-all duration-300 hover:scale-105 text-xs sm:text-sm">
-                    Schedule Assessment
-                  </Button>
-                </a>
-              </div>
             </div>
           </div>
         </div>

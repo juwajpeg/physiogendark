@@ -230,9 +230,8 @@ export default function CaseStudiesPage() {
   }
 
   const CaseCard = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
-    <Link href={`/clinical-case-studies/${caseStudy.id}`} passHref legacyBehavior>
-      <a style={{ textDecoration: 'none' }}>
-        <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+    <Link href={`/clinical-case-studies/${caseStudy.id}`} className="block">
+      <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
           <CardHeader className="pb-2 sm:pb-3 px-4 sm:px-6">
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
@@ -288,8 +287,7 @@ export default function CaseStudiesPage() {
             </div>
           </CardContent>
         </Card>
-      </a>
-    </Link>
+      </Link>
   )
 
   const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
@@ -369,11 +367,6 @@ export default function CaseStudiesPage() {
             </Link>
             <div className="flex items-center space-x-2 sm:space-x-4">
               <span className="text-gray-300 font-light text-sm sm:text-base hidden sm:block">Clinical Database</span>
-              <a href="tel:00923137818887">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-3 sm:px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 text-xs sm:text-sm">
-                  Schedule Assessment
-                </Button>
-              </a>
             </div>
           </div>
         </div>
