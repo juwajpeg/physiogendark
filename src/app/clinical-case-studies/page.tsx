@@ -17,8 +17,6 @@ import {
   MapPin,
   ChevronLeft,
   ChevronRight,
-  Download,
-  Upload,
   SortAsc,
   SortDesc,
   Grid,
