@@ -51,72 +51,48 @@ interface DatabaseCaseStudy {
   }
 }
 
-// Mock data generator for demonstration
-const generateMockCaseStudies = (count: number) => {
-  const conditions = [
-    "ACL Reconstruction",
-    "Cerebral Palsy",
-    "Stroke Recovery",
-    "Low Back Pain",
-    "Shoulder Impingement",
-    "Hip Replacement",
-    "Spinal Cord Injury",
-    "Parkinson's Disease",
-    "Multiple Sclerosis",
-    "Traumatic Brain Injury",
-    "Chronic Pain",
-    "Sports Injury",
-    "Arthritis",
-    "Fibromyalgia",
-    "Carpal Tunnel",
-    "Tennis Elbow",
-    "Plantar Fasciitis",
-    "Rotator Cuff Tear",
-    "Meniscus Tear",
-    "Fracture Recovery",
-  ]
-
-  const specialties = [
-    "Orthopedic",
-    "Neurological",
-    "Sports Medicine",
-    "Pediatric",
-    "Geriatric",
-    "Cardiopulmonary",
-    "Women's Health",
-    "Hand Therapy",
-    "Vestibular",
-    "Oncology",
-  ]
-
-  const outcomes = ["Excellent", "Good", "Fair", "Poor"]
-  const treatmentTypes = ["Manual Therapy", "Exercise Therapy", "Electrotherapy", "Hydrotherapy", "Dry Needling"]
-
-  return Array.from({ length: count }, (_, i) => ({
-    id: `CS${String(i + 1).padStart(6, "0")}`,
-    title: `${conditions[Math.floor(Math.random() * conditions.length)]} Treatment Protocol`,
-    patient: {
-      age: Math.floor(Math.random() * 80) + 10,
-      gender: Math.random() > 0.5 ? "Male" : "Female",
-      condition: conditions[Math.floor(Math.random() * conditions.length)],
-      duration: `${Math.floor(Math.random() * 24) + 4} weeks`,
+// Fixed case studies data - only the 2 detailed cases
+const getCaseStudies = (): DatabaseCaseStudy[] => {
+  return [
+    {
+      id: "CS000001",
+      title: "Post-Surgical ACL Reconstruction Recovery",
+      patient: {
+        gender: "Male",
+        age: 24,
+        condition: "Complete ACL Rupture with Grade 2 Medial Meniscal Tear",
+        duration: "16 weeks",
+      },
+      specialty: "Sports Medicine & Orthopedic Rehabilitation",
+      outcome: "Excellent",
+      successRate: 98,
+      treatmentType: "Exercise Therapy",
+      dateCompleted: new Date("2024-05-15"),
+      therapist: "Dr. Sarah Johnson, PT, DPT, SCS",
+      metrics: {
+        satisfactionScore: "9.8",
+      },
     },
-    specialty: specialties[Math.floor(Math.random() * specialties.length)],
-    treatmentType: treatmentTypes[Math.floor(Math.random() * treatmentTypes.length)],
-    outcome: outcomes[Math.floor(Math.random() * outcomes.length)],
-    successRate: Math.floor(Math.random() * 40) + 60, // 60-100%
-    dateCompleted: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000 * 3), // Last 3 years
-    therapist: `Dr. ${["Smith", "Johnson", "Williams", "Brown", "Jones"][Math.floor(Math.random() * 5)]}`,
-    tags: Array.from(
-      { length: Math.floor(Math.random() * 3) + 1 },
-      () => ["acute", "chronic", "post-surgical", "conservative", "intensive"][Math.floor(Math.random() * 5)],
-    ),
-    metrics: {
-      painReduction: Math.floor(Math.random() * 8) + 2, // 2-10 point reduction
-      functionalImprovement: Math.floor(Math.random() * 40) + 40, // 40-80% improvement
-      satisfactionScore: (Math.random() * 2 + 8).toFixed(1), // 8.0-10.0
+    {
+      id: "CS000002",
+      title: "Pediatric Cerebral Palsy Motor Development",
+      patient: {
+        gender: "Female",
+        age: 8,
+        condition: "Bilateral lower extremity spasticity with gait dysfunction",
+        duration: "24 weeks",
+      },
+      specialty: "Pediatric Neurology",
+      outcome: "Good",
+      successRate: 89,
+      treatmentType: "Neurodevelopmental Treatment",
+      dateCompleted: new Date("2024-02-28"),
+      therapist: "Dr. Michael Chen",
+      metrics: {
+        satisfactionScore: "9.2",
+      },
     },
-  }))
+  ]
 }
 
 export default function CaseStudiesPage() {
@@ -124,7 +100,7 @@ export default function CaseStudiesPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   // Data management
-  const [allCaseStudies] = useState(() => generateMockCaseStudies(150000)) // 150k cases for demo
+  const [allCaseStudies] = useState(() => getCaseStudies()) // Only the 2 detailed cases
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(20)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
@@ -156,7 +132,7 @@ export default function CaseStudiesPage() {
 
   // Filter and search logic
   const filteredCases = useMemo(() => {
-    const filtered = allCaseStudies.filter((caseStudy) => {
+    const filtered = allCaseStudies.filter((caseStudy: DatabaseCaseStudy) => {
       const matchesSearch =
         searchTerm === "" ||
         caseStudy.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -176,7 +152,7 @@ export default function CaseStudiesPage() {
     })
 
     // Sort filtered results
-    filtered.sort((a, b) => {
+    filtered.sort((a: DatabaseCaseStudy, b: DatabaseCaseStudy) => {
       let comparison = 0
       switch (sortBy) {
         case "date":
@@ -207,10 +183,10 @@ export default function CaseStudiesPage() {
   // Statistics
   const stats = useMemo(() => {
     const total = filteredCases.length
-    const excellent = filteredCases.filter((c) => c.outcome === "Excellent").length
-    const avgSuccess = filteredCases.reduce((sum, c) => sum + c.successRate, 0) / total || 0
+    const excellent = filteredCases.filter((c: DatabaseCaseStudy) => c.outcome === "Excellent").length
+    const avgSuccess = filteredCases.reduce((sum: number, c: DatabaseCaseStudy) => sum + c.successRate, 0) / total || 0
     const avgSatisfaction =
-      filteredCases.reduce((sum, c) => sum + Number.parseFloat(c.metrics.satisfactionScore), 0) / total || 0
+      filteredCases.reduce((sum: number, c: DatabaseCaseStudy) => sum + Number.parseFloat(c.metrics.satisfactionScore), 0) / total || 0
 
     return {
       total,
@@ -221,10 +197,10 @@ export default function CaseStudiesPage() {
   }, [filteredCases])
 
   // Get unique values for filter dropdowns
-  const uniqueSpecialties = [...new Set(allCaseStudies.map((c) => c.specialty))].sort()
-  const uniqueConditions = [...new Set(allCaseStudies.map((c) => c.patient.condition))].sort()
+  const uniqueSpecialties = [...new Set(allCaseStudies.map((c: DatabaseCaseStudy) => c.specialty))].sort()
+  const uniqueConditions = [...new Set(allCaseStudies.map((c: DatabaseCaseStudy) => c.patient.condition))].sort()
   const uniqueOutcomes = ["Excellent", "Good", "Fair", "Poor"]
-  const uniqueTreatmentTypes = [...new Set(allCaseStudies.map((c) => c.treatmentType))].sort()
+  const uniqueTreatmentTypes = [...new Set(allCaseStudies.map((c: DatabaseCaseStudy) => c.treatmentType))].sort()
 
   const clearFilters = () => {
     setFilters({
