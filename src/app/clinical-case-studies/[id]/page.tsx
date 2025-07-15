@@ -418,7 +418,16 @@ const detailedCaseStudies: { [key: string]: CaseStudy } = {
   },
 }
 
-export default function CaseStudyDetailPage({ params }: { params: { id: string } }) {
+// Add correct props type for Next.js App Router
+
+type Props = {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default function CaseStudyDetailPage({ params }: Props) {
   const [isVisible, setIsVisible] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null)
