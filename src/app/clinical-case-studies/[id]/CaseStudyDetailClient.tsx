@@ -17,8 +17,6 @@ import {
   BarChart3,
   Stethoscope,
   FileText,
-  Download,
-  Share2,
   User,
   MapPin,
 } from "lucide-react"
