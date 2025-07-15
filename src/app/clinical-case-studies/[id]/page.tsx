@@ -85,7 +85,7 @@ type FollowUp =
       additionalNotes?: string;
     };
 
-export interface CaseStudy {
+interface CaseStudy {
   id: string;
   title: string;
   patient: PatientInfo;
@@ -418,16 +418,13 @@ const detailedCaseStudies: { [key: string]: CaseStudy } = {
   },
 }
 
-// Add correct props type for Next.js App Router
-
-type Props = {
-  params: {
-    id: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default function CaseStudyDetailPage({ params }: Props) {
+export default function CaseStudyDetailPage({
+  params,
+  searchParams,
+}: {
+  params: { id: string }
+  searchParams?: { [key: string]: string | string[] | undefined }
+}) {
   const [isVisible, setIsVisible] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null)
