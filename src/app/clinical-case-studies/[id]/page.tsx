@@ -420,7 +420,7 @@ const detailedCaseStudies: { [key: string]: CaseStudy } = {
 
 export default function CaseStudyDetailPage({
   params,
-  searchParams,
+  searchParams: _searchParams,
 }: {
   params: { id: string }
   searchParams?: { [key: string]: string | string[] | undefined }
