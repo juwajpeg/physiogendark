@@ -1,5 +1,6 @@
 import CaseStudyDetailClient from "./CaseStudyDetailClient"
 
-export default function CaseStudyDetailPage({ params }: { params: { id: string } }) {
-  return <CaseStudyDetailClient id={params.id} />
+export default async function CaseStudyDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  return <CaseStudyDetailClient id={id} />
 }
