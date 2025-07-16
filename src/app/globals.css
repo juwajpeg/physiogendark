@@ -143,4 +143,16 @@
   header {
     animation: float-mobile 4s ease-in-out infinite !important;
   }
+  
+  /* Improve touch handling for mobile */
+  a[href] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Ensure cards are fully clickable on mobile */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }

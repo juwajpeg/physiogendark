@@ -228,9 +228,15 @@ export default function CaseStudiesPage() {
     }
   }
 
-  const CaseCard = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
-    <Link href={`/clinical-case-studies/${caseStudy.id}`} className="block">
-      <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+  const CaseCard = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => {
+    const handleClick = (e: React.MouseEvent) => {
+      e.preventDefault()
+      window.location.href = `/clinical-case-studies/${caseStudy.id}`
+    }
+
+    return (
+      <div onClick={handleClick} className="block touch-manipulation cursor-pointer">
+        <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer group select-none">
           <CardHeader className="pb-2 sm:pb-3 px-4 sm:px-6">
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
@@ -286,12 +292,19 @@ export default function CaseStudiesPage() {
             </div>
           </CardContent>
         </Card>
-      </Link>
-  )
+      </div>
+    )
+  }
 
-  const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
-    <Link href={`/clinical-case-studies/${caseStudy.id}`} className="block">
-      <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group">
+  const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => {
+    const handleClick = (e: React.MouseEvent) => {
+      e.preventDefault()
+      window.location.href = `/clinical-case-studies/${caseStudy.id}`
+    }
+
+    return (
+      <div onClick={handleClick} className="block touch-manipulation cursor-pointer">
+        <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group select-none">
         <CardContent className="p-3 sm:p-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
             <div className="flex-1 grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 items-start sm:items-center">
@@ -313,8 +326,9 @@ export default function CaseStudiesPage() {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </div>
   )
+  }
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden relative">
