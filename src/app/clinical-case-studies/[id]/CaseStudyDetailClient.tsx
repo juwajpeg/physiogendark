@@ -469,8 +469,8 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
       />
 
       {/* Header */}
-      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-7xl bg-black/50 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/20 shadow-2xl mx-4">
-        <div className="px-4 sm:px-6 py-3 sm:py-4">
+      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-7xl bg-black/50 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/20 shadow-2xl">
+        <div className="px-3 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between h-12 sm:h-16">
             <div className="flex items-center space-x-2 sm:space-x-4">
               <Link

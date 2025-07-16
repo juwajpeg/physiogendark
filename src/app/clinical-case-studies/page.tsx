@@ -102,7 +102,6 @@ export default function CaseStudiesPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(20)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [_selectedCase, setSelectedCase] = useState<string | null>(null)
 
   // Search and filtering
   const [searchTerm, setSearchTerm] = useState("")
@@ -291,33 +290,30 @@ export default function CaseStudiesPage() {
   )
 
   const CaseListItem = ({ caseStudy }: { caseStudy: DatabaseCaseStudy }) => (
-    <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group">
-      <CardContent className="p-3 sm:p-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 items-start sm:items-center">
-            <div className="sm:col-span-1">
-              <div className="text-xs text-gray-400">{caseStudy.id}</div>
-              <div className="text-sm text-white font-medium line-clamp-2 sm:truncate">{caseStudy.title}</div>
+    <Link href={`/clinical-case-studies/${caseStudy.id}`} className="block">
+      <Card className="border-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 cursor-pointer group">
+        <CardContent className="p-3 sm:p-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 items-start sm:items-center">
+              <div className="sm:col-span-1">
+                <div className="text-xs text-gray-400">{caseStudy.id}</div>
+                <div className="text-sm text-white font-medium line-clamp-2 sm:truncate">{caseStudy.title}</div>
+              </div>
+              <div className="text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-1">{caseStudy.patient.condition}</div>
+              <div className="text-xs sm:text-sm text-blue-400 truncate">{caseStudy.specialty}</div>
+              <div className={`px-2 py-1 rounded-full text-xs font-medium w-fit ${getOutcomeColor(caseStudy.outcome)}`}>
+                {caseStudy.outcome}
+              </div>
+              <div className="text-xs sm:text-sm text-green-400 font-medium">{caseStudy.successRate}%</div>
+              <div className="text-xs text-gray-400">{caseStudy.dateCompleted.toLocaleDateString()}</div>
             </div>
-            <div className="text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-1">{caseStudy.patient.condition}</div>
-            <div className="text-xs sm:text-sm text-blue-400 truncate">{caseStudy.specialty}</div>
-            <div className={`px-2 py-1 rounded-full text-xs font-medium w-fit ${getOutcomeColor(caseStudy.outcome)}`}>
-              {caseStudy.outcome}
+            <div className="self-end sm:self-center text-blue-400 group-hover:text-blue-300">
+              <Eye className="h-4 w-4" />
             </div>
-            <div className="text-xs sm:text-sm text-green-400 font-medium">{caseStudy.successRate}%</div>
-            <div className="text-xs text-gray-400">{caseStudy.dateCompleted.toLocaleDateString()}</div>
           </div>
-          <Button
-            size="sm"
-            variant="ghost"
-            className="self-end sm:self-center text-blue-400 hover:text-blue-300"
-            onClick={() => setSelectedCase(caseStudy.id)}
-          >
-            <Eye className="h-4 w-4" />
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   )
 
   return (
@@ -351,22 +347,22 @@ export default function CaseStudiesPage() {
       />
 
       {/* Header */}
-      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-7xl bg-black/30 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl">
-        <div className="px-6 py-4">
+      <header className="fixed top-2 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-7xl bg-black/30 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl">
+        <div className="px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
-              className="flex items-center space-x-3 text-white transition-all duration-300 hover:text-blue-400 group"
+              className="flex items-center space-x-2 sm:space-x-3 text-white transition-all duration-300 hover:text-blue-400 group"
             >
-              <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" />
-              <span className="text-xl font-light">
+              <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:-translate-x-1" />
+              <span className="text-lg sm:text-xl font-light">
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Physiogen
                 </span>
               </span>
             </Link>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <span className="text-gray-300 font-light text-sm sm:text-base hidden sm:block">Clinical Database</span>
+              <span className="text-gray-300 font-light text-xs sm:text-sm hidden sm:block">Clinical Database</span>
             </div>
           </div>
         </div>
