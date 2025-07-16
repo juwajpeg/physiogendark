@@ -27,6 +27,8 @@ import {
   Stethoscope,
   Globe,
   MessageCircle,
+  Baby,
+  Flower,
 } from "lucide-react"
 
 export default function PhysiogenFit() {
@@ -91,10 +93,10 @@ export default function PhysiogenFit() {
     },
     {
       icon: <Brain className="h-6 w-6" />,
-      title: "Neurological and Pediatric Rehabilitation",
-      desc: "Specialized protocols to enhance motor function and developmental outcomes in neurological and pediatric conditions using tailored neuroplasticity-focused approaches.",
+      title: "Neurological Rehabilitation",
+      desc: "Specialized protocols to enhance motor function and developmental outcomes in neurological conditions using tailored neuroplasticity-focused approaches.",
       gradient: "from-purple-500 to-pink-400",
-      modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Functional Movement Training", "Sensory Integration Techniques"],
+      modalities: ["Neurodevelopmental Therapy (NDT)", "Functional Movement Training", "Sensory Integration Techniques"],
     },
     {
       icon: <TrendingUp className="h-6 w-6" />,
@@ -102,6 +104,20 @@ export default function PhysiogenFit() {
       desc: "Sport-specific conditioning and biomechanical optimization to maximize performance, improve efficiency, and reduce injury risk.",
       gradient: "from-green-500 to-emerald-400",
       modalities: ["Sport-Specific Strength and Conditioning", "Biomechanical Movement Analysis", "Agility and Power Training Protocols"],
+    },
+    {
+      icon: <Baby className="h-6 w-6" />,
+      title: "Pediatric Rehabilitation",
+      desc: "Specialized therapeutic interventions for children and adolescents to support optimal development, motor skills, and functional independence.",
+      gradient: "from-yellow-500 to-orange-400",
+      modalities: ["Developmental Milestone Assessment", "Motor Skills Development", "Family-Centered Care Planning"],
+    },
+    {
+      icon: <Flower className="h-6 w-6" />,
+      title: "Women's Health Physiotherapy",
+      desc: "Comprehensive pelvic health and women's wellness services addressing pregnancy, postpartum recovery, and women-specific conditions.",
+      gradient: "from-pink-500 to-rose-400",
+      modalities: ["Pelvic Floor Rehabilitation", "Prenatal and Postpartum Care", "Women's Wellness Programs"],
     },
     {
       icon: <Users className="h-6 w-6" />,
@@ -352,7 +368,7 @@ export default function PhysiogenFit() {
               href="#home"
               className="text-lg md:text-xl font-light text-white transition-all duration-300 hover:text-blue-400 relative group"
             >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Physiogen</span>
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">Physiogen</span>
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
             </Link>
             {/* Desktop Navigation */}
@@ -471,13 +487,17 @@ export default function PhysiogenFit() {
                   </span>
                 </h1>
 
-                <p
-                  className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 ease-out delay-300"
+                <div
+                  className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 ease-out delay-300 space-y-4"
                   style={{ transform: `translateY(${scrollY * 0.02}px)` }}
                 >
-                  Physiogen is the leading Physiotherapy, Hijama & Chiropractic Center located at the heart of Bahria Town, Lahore. We provide the best Physiotherapy, Chiropractic, Hijama Therapy and Dry Needling services to get you back to your active and pain free life.
-                </p>
-              </div>
+                  <p>
+                    Imagine a life where pain doesn’t hold you back—a life where you can move freely, stay active, and enjoy every moment.
+                  </p>
+                  <p>
+                    At Physiogen, we’re making that life a reality.
+                  </p>
+                </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a href="https://wa.me/923137818887" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex justify-center">
@@ -517,6 +537,7 @@ export default function PhysiogenFit() {
                     <div className="text-gray-400 font-light text-sm mt-2">{metric.label}</div>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
           </div>
@@ -1061,8 +1082,6 @@ export default function PhysiogenFit() {
                 "Case Studies",
                 "Location",
                 "Consultation",
-                "Privacy Policy",
-                "Terms of Service",
               ].map((item) => (
                 <Link
                   key={item}
