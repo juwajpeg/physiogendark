@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Head from "next/head"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -40,6 +41,142 @@ export default function PhysiogenFit() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [lastScrollY, setLastScrollY] = useState(0)
   const [headerVisible, setHeaderVisible] = useState(true)
+
+  // Add structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Physiogen - Advanced Rehabilitation Science",
+    "url": "https://physiogen.fit",
+    "logo": "https://physiogen.fit/logo.png",
+    "image": "https://physiogen.fit/clinic-image.jpg",
+    "description": "Leading rehabilitation science clinic in Lahore, Pakistan. Evidence-based physiotherapy, sports medicine, neurological rehabilitation, and women's health services.",
+    "telephone": "+92-313-7818887",
+    "email": "contact@physiogen.fit",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "35, Iqbal, Block Commercial FF Bahria Town",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "Pakistan",
+      "postalCode": "54000"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 31.363881,
+      "longitude": 74.183399
+    },
+    "openingHours": "Mo-Su 09:00-18:00",
+    "priceRange": "$$",
+    "medicalSpecialty": [
+      "Sports Physiotherapy",
+      "Physiotherapy",
+      "Sports Medicine",
+      "Neurological Rehabilitation",
+      "Women's Health",
+      "Pediatric Rehabilitation",
+      "Orthopedic Rehabilitation"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Muhammad Mubarak Janjua",
+      "jobTitle": "Founder & CEO",
+      "description": "PT, MSSPT - HCPC (UK) Licensed | Bronze Medalist",
+      "knowsAbout": ["Sports Physiotherapy", "Sports Injury Rehabilitation", "Athletic Performance Optimization"]
+    }
+  }
+
+  // Additional structured data for services
+  const servicesStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "about": {
+      "@type": "MedicalBusiness",
+      "name": "Physiogen",
+      "medicalSpecialty": [
+        "Sports Physiotherapy",
+        "Physiotherapy",
+        "Sports Medicine",
+        "Neurological Rehabilitation",
+        "Women's Health"
+      ]
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "MedicalProcedure",
+            "name": "Sports Physiotherapy",
+            "procedureType": "PhysicalTherapy",
+            "description": "Specialized sports injury assessment, rehabilitation, and prevention services with advanced techniques for athletes at all levels, delivered by certified sports physiotherapy specialists."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "MedicalProcedure",
+            "name": "Musculoskeletal Rehabilitation",
+            "procedureType": "PhysicalTherapy",
+            "description": "Targeted interventions to restore function and alleviate pain through evidence-based biomechanical and neuromuscular strategies."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "MedicalProcedure",
+            "name": "Neurological & Pediatric Rehabilitation",
+            "procedureType": "PhysicalTherapy",
+            "description": "Specialized protocols for neurological conditions and pediatric development, using evidence-based neuroplasticity approaches for all ages."
+          }
+        }
+      ]
+    }
+  }
+
+  // Additional structured data for FAQs
+  const faqsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Physiogen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Physiogen is a leading rehabilitation science clinic in Lahore, Pakistan, offering evidence-based physiotherapy, sports medicine, neurological rehabilitation, and women's health services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Sports Physiotherapy and how can it help athletes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sports Physiotherapy is a specialized branch of physiotherapy focused on helping athletes prevent injuries, recover from sports-related trauma, and optimize performance. Our certified sports physiotherapy specialists use advanced techniques for injury assessment, rehabilitation protocols specifically designed for athletes, and evidence-based methods to facilitate quick and safe return to sport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What conditions do you treat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We treat a wide range of conditions including sports injuries (like ACL tears, rotator cuff injuries, and tennis elbow), musculoskeletal injuries, neurological disorders, sports injuries, women's health concerns, pediatric development issues, and post-surgical rehabilitation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I schedule an appointment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can schedule an appointment by calling +92-313-7818887 or visiting our facility at 35, Iqbal, Block Commercial FF Bahria Town, Lahore."
+        }
+      }
+    ]
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,24 +230,17 @@ export default function PhysiogenFit() {
     },
     {
       icon: <Brain className="h-6 w-6" />,
-      title: "Neurological Rehabilitation",
-      desc: "Specialized protocols to enhance motor function and developmental outcomes in neurological conditions using tailored neuroplasticity-focused approaches.",
+      title: "Neurological & Pediatric Rehabilitation",
+      desc: "Specialized protocols for neurological conditions and pediatric development, using evidence-based neuroplasticity approaches for all ages.",
       gradient: "from-purple-500 to-pink-400",
-      modalities: ["Neurodevelopmental Therapy (NDT)", "Functional Movement Training", "Sensory Integration Techniques"],
+      modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Motor Skills Development", "Sensory Integration & Developmental Milestone Assessment"],
     },
     {
-      icon: <TrendingUp className="h-6 w-6" />,
-      title: "Sports and Athletic Performance",
-      desc: "Sport-specific conditioning and biomechanical optimization to maximize performance, improve efficiency, and reduce injury risk.",
+      icon: <Award className="h-6 w-6" />,
+      title: "Sports Physiotherapy",
+      desc: "Specialized sports injury assessment, rehabilitation, and prevention services with advanced techniques for athletes at all levels, delivered by certified sports physiotherapy specialists.",
       gradient: "from-green-500 to-emerald-400",
-      modalities: ["Sport-Specific Strength and Conditioning", "Biomechanical Movement Analysis", "Agility and Power Training Protocols"],
-    },
-    {
-      icon: <Baby className="h-6 w-6" />,
-      title: "Pediatric Rehabilitation",
-      desc: "Specialized therapeutic interventions for children and adolescents to support optimal development, motor skills, and functional independence.",
-      gradient: "from-yellow-500 to-orange-400",
-      modalities: ["Developmental Milestone Assessment", "Motor Skills Development", "Family-Centered Care Planning"],
+      modalities: ["Sports Injury Rehabilitation", "Athletic Performance Optimization", "Return-to-Play Assessments & Protocols"],
     },
     {
       icon: <Flower className="h-6 w-6" />,
@@ -146,6 +276,13 @@ export default function PhysiogenFit() {
       desc: "Holistic nutritional strategies and lifestyle interventions to optimize health, support recovery, and enhance overall well-being.",
       gradient: "from-teal-500 to-cyan-400",
       modalities: ["Personalized Nutritional Assessments", "Dietary Supplementation Guidance", "Lifestyle and Wellness Coaching"],
+    },
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Obesity and Weight Management",
+      desc: "Evidence-based weight management programs combining physiotherapy, nutrition science, and behavioral interventions for sustainable results.",
+      gradient: "from-blue-500 to-green-400",
+      modalities: ["Metabolic Assessment & Body Composition Analysis", "Exercise Prescription for Weight Management", "Behavioral Modification & Lifestyle Coaching"],
     },
   ]
 
@@ -194,7 +331,7 @@ export default function PhysiogenFit() {
     {
       name: "Dr. Bisma Khan, DPT",
       role: "Outpatient Physiotherapy Specialist",
-      specialty: "Women’s Health | Pediatric Physical Therapy",
+      specialty: "Women's Health | Pediatric Physical Therapy",
       credentials: "Clinical Rehabilitation & Movement Science",
       gradient: "from-purple-500 to-pink-500",
       image: "/Bisma.svg",
@@ -202,43 +339,81 @@ export default function PhysiogenFit() {
     },
     {
       name: "Dr. Muhammad Mubarak Janjua, PT, MSSPT",
-      role: "Founder & CEO – Physiogen",
-      specialty: "Sports & Orthopedic Physiotherapy | OPD Rehabilitation",
-      credentials: "HCPC (UK) Licensed | Bronze Medalist",
+      role: "Founder & CEO – Physiogen | Sports Physiotherapy Specialist",
+      specialty: "Sports Physiotherapy | Athletic Performance | Rehabilitation",
+      credentials: "HCPC (UK) Licensed | Bronze Medalist | Certified Sports Physiotherapist",
       gradient: "from-orange-500 to-red-500",
-      tagline: "Optimizing Athletic Performance and Recovery through Movement, Psychology, and Lifestyle Science",
+      tagline: "Expert in Sports Injury Rehabilitation and Athletic Performance Optimization",
+      image: "/muhammad.svg",
     },
   ]
 
+  // Static case studies data
   const clinicalOutcomes = [
     {
-      patient: "S. Johnson, Competitive Athlete",
-      condition: "Post-Surgical ACL Reconstruction",
-      intervention:
-        "12-week progressive neuromuscular re-education protocol with sport-specific functional training and biomechanical optimization",
-      outcome: "Return to competitive performance with 98% functional capacity restoration",
-      timeframe: "16 weeks post-intervention",
+      title: "Post-Surgical ACL Reconstruction Recovery",
+      Demographics: "Male, 24 years, Professional Athlete",
+      "Doctors notes": "Complete recovery with return to professional sports within 6 months. Achieved 98% strength symmetry and full functional capacity.",
+      id: "CS000001"
     },
     {
-      patient: "M. Chen, Software Engineer",
-      condition: "Chronic Cervicothoracic Dysfunction",
-      intervention:
-        "Multimodal approach incorporating manual therapy, postural re-education, and ergonomic workplace modifications",
-      outcome: "Complete resolution of symptoms with improved cervical range of motion and functional capacity",
-      timeframe: "8 weeks treatment duration",
+      title: "Chronic Lower Back Pain Management",
+      Demographics: "Female, 42 years, Office Worker",
+      "Doctors notes": "Significant pain reduction and improved functional capacity through targeted core strengthening and ergonomic modifications.",
+      id: "CS000002"
     },
     {
-      patient: "E. Rodriguez, Professional Athlete",
-      condition: "Performance Enhancement Protocol",
-      intervention:
-        "Comprehensive biomechanical analysis with targeted strength and conditioning program utilizing periodization principles",
-      outcome: "25% improvement in sport-specific performance metrics with injury risk reduction",
-      timeframe: "12-week intervention period",
-    },
+      title: "Pediatric Cerebral Palsy Motor Development",
+      Demographics: "Female, 8 years, Student",
+      "Doctors notes": "Remarkable improvement in gross motor skills and functional independence through consistent neurodevelopmental therapy.",
+      id: "CS000003"
+    }
   ]
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden relative">
+      {/* SEO Head Content */}
+      <Head>
+        <title>Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists | Lahore, Pakistan</title>
+        <meta name="description" content="Leading sports physiotherapy and rehabilitation science clinic in Lahore, Pakistan. Specialized sports injury assessment and rehabilitation by certified sports physio specialists. 15+ years of clinical excellence with 98% treatment efficacy." />
+        <meta name="keywords" content="sports physiotherapy Lahore, sports injury rehabilitation, sports medicine, athletic performance optimization, return-to-play assessment, physiotherapy Pakistan, rehabilitation science, neurological rehabilitation, women's health physiotherapy, evidence-based treatment" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://physiogen.fit" />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:title" content="Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists" />
+        <meta property="og:description" content="Leading sports physiotherapy clinic in Lahore, Pakistan. Specialized sports injury rehabilitation by certified specialists with advanced techniques for athletes at all levels." />
+        <meta property="og:url" content="https://physiogen.fit" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://physiogen.fit/clinic-image.jpg" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Physiogen - Sports Physiotherapy Specialists" />
+        <meta name="twitter:description" content="Leading sports physiotherapy clinic in Lahore with certified specialists for sports injury rehabilitation and athletic performance optimization." />
+        <meta name="twitter:image" content="https://physiogen.fit/clinic-image.jpg" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqsStructuredData) }}
+        />
+      </Head>
+      
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      
       {/* Scientific Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* DNA Helix Pattern */}
@@ -496,8 +671,8 @@ export default function PhysiogenFit() {
                   </p>
                   <p>
                     At Physiogen, we’re making that life a reality.
-                  </p>
-                </div>
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a href="https://wa.me/923137818887" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex justify-center">
@@ -728,7 +903,7 @@ export default function PhysiogenFit() {
                       {clinician.image ? (
                         <img
                           src={clinician.image}
-                          alt={clinician.name}
+                          alt={`${clinician.name} - Physiogen Clinical Specialist`}
                           className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white shadow-lg group-hover:scale-110 transition-all duration-300"
                         />
                       ) : (
@@ -792,15 +967,19 @@ export default function PhysiogenFit() {
               </div>
               <h2 className="text-5xl font-extralight text-white mb-6">Evidence-Based Case Studies</h2>
               <p className="text-xl text-gray-300 font-light max-w-4xl mx-auto">
-                Documented clinical outcomes demonstrating the efficacy of our evidence-based therapeutic interventions
-                across diverse patient populations and pathological conditions.
+                Documented clinical outcomes from our sports physiotherapy specialists demonstrating the efficacy of our evidence-based therapeutic interventions
+                across diverse athletic populations and sports-related injuries.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
+              {/* Comment out the old rendering */}
+              {/* {clinicalOutcomes.map((study, index) => ( ... ))} */}
+
+              {/* Render fetched case studies */}
               {clinicalOutcomes.map((study, index) => (
                 <Card
-                  key={index}
+                  key={study.id || index}
                   className="group border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -814,31 +993,19 @@ export default function PhysiogenFit() {
                         />
                       ))}
                     </div>
-
                     <div className="space-y-4">
                       <div>
-                        <h3 className="font-medium text-white text-lg mb-1">{study.patient}</h3>
-                        <p className="text-blue-400 font-light text-sm">{study.condition}</p>
+                        <h3 className="font-medium text-white text-lg mb-1">{study.title}</h3>
+                        <p className="text-blue-400 font-light text-sm">{study.Demographics}</p>
                       </div>
-
-                      <div className="space-y-3">
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-200 mb-2">Clinical Intervention:</h4>
-                          <p className="text-gray-300 font-light text-sm leading-relaxed">{study.intervention}</p>
+                      {study["Doctors notes"] && (
+                        <div className="pt-4 border-t border-gray-800">
+                          <div className="text-gray-300 font-light text-sm">
+                            <span className="font-medium text-gray-200">Doctor's Notes: </span>
+                            {study["Doctors notes"]}
+                          </div>
                         </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-200 mb-2">Clinical Outcome:</h4>
-                          <p className="text-gray-200 font-light text-sm leading-relaxed">{study.outcome}</p>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-gray-800">
-                        <div className="inline-flex items-center space-x-2 bg-green-500/20 px-3 py-1 rounded-full text-xs text-green-300 border border-green-500/30">
-                          <CheckCircle className="h-3 w-3" />
-                          <span>{study.timeframe}</span>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

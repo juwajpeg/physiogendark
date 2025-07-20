@@ -21,6 +21,7 @@ import {
   MapPin,
 } from "lucide-react"
 import { CaseStudy } from "./case-study-types"
+import Head from "next/head"
 
 // Comprehensive detailed case studies data
 const detailedCaseStudies: { [key: string]: CaseStudy } = {
@@ -339,6 +340,101 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null)
 
+  // Generate enhanced structured data for SEO
+  const generateStructuredData = (study: CaseStudy) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "MedicalCaseStudy",
+      "name": study.title,
+      "description": `${study.patient.condition} - ${study.specialty} case study with ${study.successRate}% success rate`,
+      "url": `https://physiogen.fit/clinical-case-studies/${id}`,
+      "identifier": study.id,
+      "datePublished": study.dateCompleted,
+      "publisher": {
+        "@type": "MedicalClinic",
+        "name": "Physiogen Clinical Sciences",
+        "url": "https://physiogen.fit"
+      },
+      "author": {
+        "@type": "Person",
+        "name": study.therapist
+      },
+      "patient": {
+        "@type": "Person",
+        "description": study.patient.demographics
+      },
+      "medicalCondition": study.patient.condition,
+      "medicalSpecialty": study.specialty,
+      "treatmentType": "Physiotherapy",
+      "outcome": study.successRate > 90 ? "Excellent" : study.successRate > 80 ? "Good" : "Fair",
+      "successRate": study.successRate,
+      "followUp": typeof study.followUp === "string" ? study.followUp : 
+        (study.followUp && typeof study.followUp === "object" ? 
+          `${study.followUp.shortTerm} ${study.followUp.mediumTerm} ${study.followUp.longTerm}` : 
+          "Follow-up information available"),
+      "mainEntity": {
+        "@type": "MedicalTherapy",
+        "name": study.title,
+        "description": study.patient.condition
+      }
+    }
+  }
+  
+  // Generate breadcrumb structured data for SEO
+  const generateBreadcrumbData = (study: CaseStudy) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://physiogen.fit"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Clinical Case Studies",
+          "item": "https://physiogen.fit/clinical-case-studies"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": study.title,
+          "item": `https://physiogen.fit/clinical-case-studies/${id}`
+        }
+      ]
+    }
+  }
+  
+  // Generate medical treatment structured data
+  const generateTreatmentData = (study: CaseStudy) => {
+    if (!study.treatmentProtocol) return null;
+    
+    const phases = Object.values(study.treatmentProtocol);
+    
+    return {
+      "@context": "https://schema.org",
+      "@type": "MedicalTherapy",
+      "name": study.title,
+      "description": study.patient.condition,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://physiogen.fit/clinical-case-studies/${id}`
+      },
+      "medicineSystem": "Physiotherapy",
+      "recognizingAuthority": "Physiogen Clinical Sciences",
+      "relevantSpecialty": study.specialty,
+      "study": {
+        "@type": "MedicalObservationalStudy",
+        "studySubject": study.patient.condition,
+        "healthCondition": study.patient.condition,
+        "outcome": `${study.successRate}% success rate with ${study.outcome} outcome`
+      }
+    };
+  }
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
@@ -398,7 +494,62 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
   const IconComponent = caseStudy.icon
 
   return (
-    <div className="min-h-screen bg-black overflow-x-hidden relative">
+    <>
+      {/* Enhanced SEO Meta Tags */}
+      <Head>
+        <title>{`${caseStudy.title} - Clinical Case Study | Physiogen`}</title>
+        <meta 
+          name="description" 
+          content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate. Evidence-based rehabilitation outcomes from Physiogen Clinical Sciences.`} 
+        />
+        <meta 
+          name="keywords" 
+          content={`${caseStudy.patient.condition.toLowerCase()}, ${caseStudy.specialty.toLowerCase()}, clinical case study, physiotherapy outcomes, rehabilitation science, evidence-based treatment, Lahore physiotherapy`} 
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`https://physiogen.fit/clinical-case-studies/${id}`} />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:title" content={`${caseStudy.title} - Clinical Case Study`} />
+        <meta property="og:description" content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate.`} />
+        <meta property="og:url" content={`https://physiogen.fit/clinical-case-studies/${id}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="/case-study-og.jpg" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${caseStudy.title} - Clinical Case Study`} />
+        <meta name="twitter:description" content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate.`} />
+        <meta name="twitter:image" content="/case-study-og.jpg" />
+      </Head>
+      
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateStructuredData(caseStudy))
+        }}
+      />
+      
+      {/* Breadcrumb Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbData(caseStudy))
+        }}
+      />
+      
+      {/* Treatment Protocol Structured Data */}
+      {generateTreatmentData(caseStudy) && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateTreatmentData(caseStudy))
+          }}
+        />
+      )}
+      
+      <div className="min-h-screen bg-black overflow-x-hidden relative">
       {/* Scientific Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-20 right-10 opacity-5">
@@ -873,6 +1024,7 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
         </div>
       </footer>
     </div>
+    </>
   )
 }
 
