@@ -412,8 +412,6 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
   const generateTreatmentData = (study: CaseStudy) => {
     if (!study.treatmentProtocol) return null;
     
-    const phases = Object.values(study.treatmentProtocol);
-    
     return {
       "@context": "https://schema.org",
       "@type": "MedicalTherapy",
@@ -430,7 +428,7 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
         "@type": "MedicalObservationalStudy",
         "studySubject": study.patient.condition,
         "healthCondition": study.patient.condition,
-        "outcome": `${study.successRate}% success rate with ${study.outcome} outcome`
+        "outcome": `${study.successRate}% success rate${study.successRate > 90 ? ' with Excellent outcome' : study.successRate > 80 ? ' with Good outcome' : ' with Fair outcome'}`
       }
     };
   }

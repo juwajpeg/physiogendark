@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Head from "next/head"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -28,7 +29,6 @@ import {
   Stethoscope,
   Globe,
   MessageCircle,
-  Baby,
   Flower,
 } from "lucide-react"
 
@@ -901,9 +901,11 @@ export default function PhysiogenFit() {
                   <CardContent className="p-8 text-center space-y-6 relative z-10">
                     <div className="relative">
                       {clinician.image ? (
-                        <img
+                        <Image
                           src={clinician.image}
                           alt={`${clinician.name} - Physiogen Clinical Specialist`}
+                          width={112}
+                          height={112}
                           className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white shadow-lg group-hover:scale-110 transition-all duration-300"
                         />
                       ) : (
@@ -1001,7 +1003,7 @@ export default function PhysiogenFit() {
                       {study["Doctors notes"] && (
                         <div className="pt-4 border-t border-gray-800">
                           <div className="text-gray-300 font-light text-sm">
-                            <span className="font-medium text-gray-200">Doctor's Notes: </span>
+                            <span className="font-medium text-gray-200">Doctor&apos;s Notes: </span>
                             {study["Doctors notes"]}
                           </div>
                         </div>
