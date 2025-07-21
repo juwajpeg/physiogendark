@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, Phone, X } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 
 interface PromotionBannerProps {
   isVisible?: boolean;
