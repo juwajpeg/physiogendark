@@ -30,6 +30,7 @@ import {
   Globe,
   MessageCircle,
   Flower,
+  Home,
 } from "lucide-react"
 
 export default function PhysiogenFit() {
@@ -222,25 +223,25 @@ export default function PhysiogenFit() {
 
   const clinicalServices = [
     {
-      icon: <Activity className="h-6 w-6" />,
-      title: "Musculoskeletal Rehabilitation",
-      desc: "Targeted interventions to restore function and alleviate pain through evidence-based biomechanical and neuromuscular strategies.",
+      icon: <Award className="h-6 w-6" />,
+      title: "Sports & Musculoskeletal Rehabilitation",
+      desc: "Comprehensive rehabilitation combining targeted interventions for sports injuries and musculoskeletal conditions using evidence-based techniques.",
       gradient: "from-blue-500 to-cyan-400",
-      modalities: ["Joint Mobilization and Manipulation", "Corrective Exercise Programming", "Postural and Gait Analysis"],
+      modalities: ["Sports Injury Rehabilitation", "Joint Mobilization & Manipulation", "Athletic Performance Optimization"],
     },
     {
       icon: <Brain className="h-6 w-6" />,
       title: "Neurological & Pediatric Rehabilitation",
       desc: "Specialized protocols for neurological conditions and pediatric development, using evidence-based neuroplasticity approaches for all ages.",
       gradient: "from-purple-500 to-pink-400",
-      modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Motor Skills Development", "Sensory Integration & Developmental Milestone Assessment"],
+      modalities: ["Neurodevelopmental Therapy (NDT)", "Pediatric Motor Skills Development", "Sensory Integration Assessment"],
     },
     {
-      icon: <Award className="h-6 w-6" />,
-      title: "Sports Physiotherapy",
-      desc: "Specialized sports injury assessment, rehabilitation, and prevention services with advanced techniques for athletes at all levels, delivered by certified sports physiotherapy specialists.",
+      icon: <Home className="h-6 w-6" />,
+      title: "Home Physiotherapy Sessions",
+      desc: "Personalized rehabilitation services delivered in the comfort of your home for patients with mobility limitations or busy schedules.",
       gradient: "from-green-500 to-emerald-400",
-      modalities: ["Sports Injury Rehabilitation", "Athletic Performance Optimization", "Return-to-Play Assessments & Protocols"],
+      modalities: ["In-Home Clinical Assessment", "Personalized Home Exercise Programs", "Caregiver Training & Support"],
     },
     {
       icon: <Flower className="h-6 w-6" />,
@@ -252,37 +253,37 @@ export default function PhysiogenFit() {
     {
       icon: <Users className="h-6 w-6" />,
       title: "Occupational Therapy",
-      desc: "Functional interventions to improve daily living skills and workplace ergonomics, promoting independence and productivity.",
+      desc: "Functional interventions to improve daily living skills and workplace ergonomics, promoting independence and productivity in everyday activities.",
       gradient: "from-orange-500 to-red-400",
-      modalities: ["Activities of Daily Living (ADL) Training", "Ergonomic Assessments and Modifications", "Adaptive Equipment Training"],
+      modalities: ["Activities of Daily Living Training", "Ergonomic Assessments", "Adaptive Equipment Training"],
     },
     {
       icon: <Heart className="h-6 w-6" />,
       title: "Hijama/Cupping Therapy",
-      desc: "Traditional therapeutic techniques to enhance circulation, relieve muscle tension, and promote tissue recovery.",
+      desc: "Traditional therapeutic techniques to enhance circulation, relieve muscle tension, and promote tissue recovery for pain management.",
       gradient: "from-red-500 to-pink-400",
-      modalities: ["Wet and Dry Cupping Applications", "Myofascial Release Integration", "Pain and Stress Relief Protocols"],
+      modalities: ["Wet and Dry Cupping Applications", "Myofascial Release Integration", "Pain Relief Protocols"],
     },
     {
       icon: <Target className="h-6 w-6" />,
       title: "Dry Needling",
-      desc: "Precision-based interventions to address pain, muscle dysfunction, and energy flow through targeted needle therapy.",
+      desc: "Precision-based interventions to address pain, muscle dysfunction, and energy flow through targeted needle therapy for rapid recovery.",
       gradient: "from-indigo-500 to-purple-400",
-      modalities: ["Trigger Point Dry Needling", "Acupuncture for Pain Management", "Neuromuscular Stimulation Techniques"],
+      modalities: ["Trigger Point Dry Needling", "Acupuncture for Pain Management", "Neuromuscular Stimulation"],
     },
     {
       icon: <Shield className="h-6 w-6" />,
       title: "Nutrition and Wellness",
-      desc: "Holistic nutritional strategies and lifestyle interventions to optimize health, support recovery, and enhance overall well-being.",
+      desc: "Holistic nutritional strategies and lifestyle interventions to optimize health, support recovery, and enhance overall well-being for patients.",
       gradient: "from-teal-500 to-cyan-400",
-      modalities: ["Personalized Nutritional Assessments", "Dietary Supplementation Guidance", "Lifestyle and Wellness Coaching"],
+      modalities: ["Personalized Nutritional Assessments", "Dietary Supplementation Guidance", "Lifestyle Coaching"],
     },
     {
       icon: <TrendingUp className="h-6 w-6" />,
       title: "Obesity and Weight Management",
       desc: "Evidence-based weight management programs combining physiotherapy, nutrition science, and behavioral interventions for sustainable results.",
       gradient: "from-blue-500 to-green-400",
-      modalities: ["Metabolic Assessment & Body Composition Analysis", "Exercise Prescription for Weight Management", "Behavioral Modification & Lifestyle Coaching"],
+      modalities: ["Metabolic Assessment", "Exercise Prescription", "Behavioral Modification Coaching"],
     },
   ]
 
@@ -683,6 +684,16 @@ export default function PhysiogenFit() {
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <MessageCircle className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                     Appointment
+                  </Button>
+                </a>
+                <a href="tel:03137818887" className="w-full sm:w-auto flex justify-center">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <Phone className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                    Home Visit
                   </Button>
                 </a>
               </div>
