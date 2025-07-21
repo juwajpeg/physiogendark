@@ -316,10 +316,10 @@ export default function PhysiogenFit() {
 
   const clinicalTeam = [
     {
-      name: "Dr. Sarah Chen, DPT, PhD",
-      role: "Director of Clinical Services",
-      specialty: "Orthopedic Manual Therapy & Sports Medicine",
-      credentials: "Board-Certified Orthopedic Clinical Specialist",
+      name: "Dr. Taseen Mansoor",
+      role: "Neuro Rehabilitation Specialist",
+      specialty: "Neurological Conditions | Lower Back Specialist | Hijama",
+      credentials: "Chiropractic Techniques & KT Taping Expert",
       gradient: "from-blue-500 to-purple-500",
     },
     {
@@ -662,6 +662,29 @@ export default function PhysiogenFit() {
                     Rehabilitation Science
                   </span>
                 </h1>
+                
+                {/* Promotional Banner */}
+                <div 
+                  className="mt-8 mb-6 py-3 px-6 bg-gradient-to-r from-gray-900/80 via-gray-800/80 to-gray-900/80 backdrop-blur-sm border-y border-yellow-500/20 relative overflow-hidden group transition-all duration-500 hover:border-yellow-500/40"
+                  style={{ transform: `translateY(${scrollY * 0.04}px)` }}
+                >
+                  {/* Background glow elements */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500/5 via-yellow-300/5 to-yellow-500/5 blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-1000"></div>
+                  <div className="absolute -right-12 -bottom-12 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl"></div>
+                  <div className="absolute -left-12 -top-12 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl"></div>
+                  
+                  {/* Promotional message */}
+                  <div className="relative z-10 flex items-center justify-center">
+                    <span className="text-base sm:text-lg md:text-xl font-light text-center">
+                      <span className="text-yellow-300 font-medium">Limited Time:</span>{" "}
+                      <span className="bg-gradient-to-r from-yellow-200 to-yellow-100 bg-clip-text text-transparent font-medium">
+                        10% Off All Services
+                      </span>{" "}
+                      <span className="text-gray-300">|</span>{" "}
+                      <span className="text-blue-300">Monday - Wednesday</span>
+                    </span>
+                  </div>
+                </div>
 
                 <div
                   className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto font-light leading-relaxed transition-all duration-1000 ease-out delay-300 space-y-4"
@@ -761,6 +784,47 @@ export default function PhysiogenFit() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Promotional Card */}
+              <Card className="group border-0 bg-gradient-to-br from-gray-900/90 via-blue-900/20 to-purple-900/30 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-2xl border border-blue-500/30 order-first lg:order-3 animate-pulse-subtle">
+                <div className="absolute top-0 right-0">
+                  <div className="bg-gradient-to-r from-yellow-500 to-yellow-300 text-black font-medium px-4 py-1 text-xs uppercase tracking-wider transform rotate-0 origin-top-right">
+                    Limited Time
+                  </div>
+                </div>
+                <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl" />
+                <div className="absolute -right-20 -top-20 w-40 h-40 bg-purple-400/10 rounded-full blur-3xl" />
+                <CardContent className="p-8 relative z-10">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-lg">
+                        <Calendar className="h-6 w-6" />
+                      </div>
+                    </div>
+                    
+                    <div className="text-center space-y-4">
+                      <h3 className="text-2xl font-light text-white transition-colors duration-300 group-hover:text-blue-400">
+                        Special Offer
+                      </h3>
+                      <div className="text-3xl font-semibold bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent">
+                        10% OFF
+                      </div>
+                      <p className="text-gray-300 font-light leading-relaxed text-sm">
+                        Enjoy a special discount on all our services every Monday, Tuesday, and Wednesday.
+                      </p>
+                    </div>
+
+                    <div className="pt-4">
+                      <a href="tel:03137818887" className="block w-full">
+                        <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-lg">
+                          <Phone className="mr-2 h-4 w-4" />
+                          Book Your Session
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {clinicalServices.map((service, index) => (
                 <Card
                   key={index}
