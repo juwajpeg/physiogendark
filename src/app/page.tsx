@@ -4,8 +4,20 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Head from "next/head"
 import Image from "next/image"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+
+// Dynamically import heavy components
+const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
+  ssr: false,
+  loading: () => <div className="hidden"></div>
+})
+
+const DynamicBanner = dynamic(() => import("../components/PromotionBanner"), { 
+  ssr: false,
+  loading: () => <div className="hidden"></div>
+})
 import {
   Menu,
   X,
@@ -42,6 +54,9 @@ export default function PhysiogenFit() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [lastScrollY, setLastScrollY] = useState(0)
   const [headerVisible, setHeaderVisible] = useState(true)
+  // Add missing state for banner and modal visibility
+  const [bannerVisible, setBannerVisible] = useState(true)
+  const [modalVisible, setModalVisible] = useState(false)
 
   // Add structured data for SEO
   const structuredData = {
@@ -317,17 +332,19 @@ export default function PhysiogenFit() {
   const clinicalTeam = [
     {
       name: "Dr. Taseen Mansoor",
-      role: "Neuro Rehabilitation Specialist",
+      role: "CEO – Physiogen | Neuro Rehabilitation Specialist",
       specialty: "Neurological Conditions | Lower Back Specialist | Hijama",
       credentials: "Chiropractic Techniques & KT Taping Expert",
       gradient: "from-blue-500 to-purple-500",
+      image: "/taseen.svg"
     },
     {
-      name: "Marcus Rodriguez, MS, CSCS",
-      role: "Performance Physiologist",
-      specialty: "Exercise Physiology & Biomechanical Analysis",
-      credentials: "Certified Strength & Conditioning Specialist",
+      name: "Dr. Amna Tariq, DPT",
+      role: "Occupational Therapist",
+      specialty: "Pediatric & Adult Occupational Therapy",
+      credentials: "Specialist in Sensory Integration & Functional Rehab",
       gradient: "from-green-500 to-blue-500",
+      image: "/amna.svg"
     },
     {
       name: "Dr. Bisma Khan, DPT",
@@ -1346,6 +1363,10 @@ export default function PhysiogenFit() {
           </div>
         </div>
       </footer>
+
+      {/* Lazy loaded components for better performance */}
+      <DynamicBanner isVisible={bannerVisible} onClose={() => setBannerVisible(false)} />
+      <DynamicModal isOpen={modalVisible} onClose={() => setModalVisible(false)} />
     </div>
   )
 }
