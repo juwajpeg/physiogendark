@@ -344,7 +344,7 @@ export default function PhysiogenFit() {
       specialty: "Pediatric & Adult Occupational Therapy",
       credentials: "Specialist in Sensory Integration & Functional Rehab",
       gradient: "from-green-500 to-blue-500",
-      image: "/amna.svg"
+      image: "/Amna.svg"
     },
     {
       name: "Dr. Bisma Khan, DPT",
