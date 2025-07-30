@@ -44,6 +44,14 @@ export default function PromotionBanner({ isVisible = true, onClose }: Promotion
               <a 
                 href="tel:03137818887" 
                 className="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-md text-white transition-all duration-300 hidden sm:block"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'click', {
+                      event_category: 'Contact',
+                      event_label: 'Phone: 03137818887 (Banner)'
+                    });
+                  }
+                }}
               >
                 Book Now
               </a>

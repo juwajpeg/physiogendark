@@ -3,14 +3,19 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleTagManager from "@/components/GoogleTagManager";
 
+// Optimize font loading
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap", // Add display swap for better performance
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap", // Add display swap for better performance
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -145,6 +150,12 @@ export default function RootLayout({
         {/* Preconnect to important domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        
+        {/* Preload critical assets */}
+        <link rel="preload" href="/muhammad.svg" as="image" />
+        <link rel="preload" href="/Bisma.svg" as="image" />
         
         {/* Organization Structured Data */}
         <script
@@ -153,7 +164,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <GoogleTagManager gtmId="GTM-XXXXXXX" />
+        <GoogleTagManager gtmId="GTM-NJ34DT9G" />
         {children}
       </body>
     </html>

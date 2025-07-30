@@ -7,6 +7,7 @@ import Image from "next/image"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { trackPhoneClick, trackAppointmentClick, trackServiceView } from "@/lib/analytics"
 
 // Dynamically import heavy components
 const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
@@ -57,6 +58,15 @@ export default function PhysiogenFit() {
   // Add missing state for banner and modal visibility
   const [bannerVisible, setBannerVisible] = useState(true)
   const [modalVisible, setModalVisible] = useState(false)
+
+  // Track page view on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'GTM-NJ34DT9G', {
+        page_path: window.location.pathname
+      });
+    }
+  }, [])
 
   // Add structured data for SEO
   const structuredData = {
@@ -726,16 +736,20 @@ export default function PhysiogenFit() {
                     Appointment
                   </Button>
                 </a>
-                <a href="tel:03137818887" className="w-full sm:w-auto flex justify-center">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <Phone className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
-                    Home Visit
-                  </Button>
-                </a>
+                                                  <a 
+                                    href="tel:03137818887" 
+                                    className="w-full sm:w-auto flex justify-center"
+                                    onClick={() => trackPhoneClick("03137818887")}
+                                  >
+                                    <Button
+                                      size="lg"
+                                      className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
+                                    >
+                                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                      <Phone className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                                      Home Visit
+                                    </Button>
+                                  </a>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-20 max-w-4xl mx-auto">
@@ -831,7 +845,11 @@ export default function PhysiogenFit() {
                     </div>
 
                     <div className="pt-4">
-                      <a href="tel:03137818887" className="block w-full">
+                      <a 
+                        href="tel:03137818887" 
+                        className="block w-full"
+                        onClick={() => trackPhoneClick("03137818887")}
+                      >
                         <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-lg">
                           <Phone className="mr-2 h-4 w-4" />
                           Book Your Session

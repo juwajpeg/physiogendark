@@ -88,12 +88,23 @@ export default function PromotionModal({ isOpen = false, onClose }: PromotionMod
           {/* Modal Footer */}
           <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 p-5 border-t border-gray-700/30">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a href="tel:03137818887" className="block">
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-2 rounded-xl transition-all duration-300 shadow-lg">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Call Now
-                </Button>
-              </a>
+                              <a 
+                  href="tel:03137818887" 
+                  className="block"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && window.gtag) {
+                      window.gtag('event', 'click', {
+                        event_category: 'Contact',
+                        event_label: 'Phone: 03137818887 (Modal)'
+                      });
+                    }
+                  }}
+                >
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-2 rounded-xl transition-all duration-300 shadow-lg">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call Now
+                  </Button>
+                </a>
               <Button 
                 onClick={handleClose} 
                 className="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-5 py-2 rounded-xl transition-all duration-300 border border-gray-700"
