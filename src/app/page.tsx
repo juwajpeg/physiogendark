@@ -7,7 +7,7 @@ import Image from "next/image"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { trackPhoneClick } from "@/lib/analytics"
+import { trackPhoneClick } from "@/lib/gtm"
 
 // Dynamically import heavy components
 const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
@@ -61,10 +61,18 @@ export default function PhysiogenFit() {
 
   // Track page view on component mount
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'GTM-NJ34DT9G', {
-        page_path: window.location.pathname
-      });
+    if (typeof window !== 'undefined') {
+      // Track page view using GTM
+      const trackPageView = () => {
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'page_view',
+            page_location: window.location.href,
+            page_title: document.title,
+          });
+        }
+      };
+      trackPageView();
     }
   }, [])
 

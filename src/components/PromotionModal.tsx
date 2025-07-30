@@ -92,10 +92,11 @@ export default function PromotionModal({ isOpen = false, onClose }: PromotionMod
                   href="tel:03137818887" 
                   className="block"
                   onClick={() => {
-                    if (typeof window !== 'undefined' && window.gtag) {
-                      window.gtag('event', 'click', {
-                        event_category: 'Contact',
-                        event_label: 'Phone: 03137818887 (Modal)'
+                    if (typeof window !== 'undefined' && window.dataLayer) {
+                      window.dataLayer.push({
+                        event: 'phone_click',
+                        phone_number: '03137818887',
+                        location: 'Modal'
                       });
                     }
                   }}
