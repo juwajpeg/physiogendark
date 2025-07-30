@@ -7,7 +7,7 @@ import Image from "next/image"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { trackPhoneClick, trackAppointmentClick, trackServiceView } from "@/lib/analytics"
+import { trackPhoneClick } from "@/lib/analytics"
 
 // Dynamically import heavy components
 const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
