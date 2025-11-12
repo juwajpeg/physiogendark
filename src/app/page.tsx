@@ -688,13 +688,13 @@ export default function PhysiogenFit() {
                     className="block transition-all duration-1000 ease-out"
                     style={{ transform: `translateY(${scrollY * 0.1}px)` }}
                   >
-                    Advanced
+                    Guaranteed
                   </span>
                   <span
                     className="block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent transition-all duration-1000 ease-out"
                     style={{ transform: `translateY(${scrollY * 0.05}px)` }}
                   >
-                    Rehabilitation Science
+                    Pain Relief
                   </span>
                 </h1>
                 
