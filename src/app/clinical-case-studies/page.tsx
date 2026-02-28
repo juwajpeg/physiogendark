@@ -22,11 +22,11 @@ import {
   List,
   Eye,
   Award,
-  Layers,
   Database,
   X,
 } from "lucide-react"
-import Head from "next/head"
+import { PageBackground } from "@/components/PageBackground"
+import Footer from "@/components/Footer"
 
 // Interface for database case studies (simplified version)
 interface DatabaseCaseStudy {
@@ -159,7 +159,6 @@ const generateBreadcrumbData = () => {
 
 export default function CaseStudiesPage() {
   const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   // Data management
   const [allCaseStudies] = useState(() => getCaseStudies()) // Only the 2 detailed cases
@@ -183,12 +182,7 @@ export default function CaseStudiesPage() {
   const [showFilters, setShowFilters] = useState(false)
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", handleMouseMove)
     setIsVisible(true)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   // Filter and search logic
@@ -407,27 +401,6 @@ export default function CaseStudiesPage() {
 
   return (
     <>
-      <Head>
-        <title>Clinical Case Studies - Evidence-Based Rehabilitation Outcomes | Physiogen</title>
-        <meta name="description" content="Explore evidence-based clinical case studies from Physiogen. Real patient outcomes in ACL reconstruction recovery, pediatric cerebral palsy, sports medicine, and neurological rehabilitation. 98% treatment efficacy." />
-        <meta name="keywords" content="clinical case studies, physiotherapy outcomes, ACL reconstruction recovery, pediatric rehabilitation, sports medicine cases, neurological rehabilitation, evidence-based treatment, Lahore physiotherapy" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://physiogen.fit/clinical-case-studies" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Clinical Case Studies - Evidence-Based Rehabilitation Outcomes | Physiogen" />
-        <meta property="og:description" content="Explore evidence-based clinical case studies from Physiogen. Real patient outcomes in ACL reconstruction recovery, pediatric cerebral palsy, sports medicine, and neurological rehabilitation." />
-        <meta property="og:url" content="https://physiogen.fit/clinical-case-studies" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://physiogen.fit/case-studies-og.jpg" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Clinical Case Studies - Evidence-Based Rehabilitation Outcomes" />
-        <meta name="twitter:description" content="Explore evidence-based clinical case studies from Physiogen. Real patient outcomes in rehabilitation science." />
-        <meta name="twitter:image" content="https://physiogen.fit/case-studies-og.jpg" />
-      </Head>
-      
       {/* Structured Data for Case Studies Collection */}
       <script
         type="application/ld+json"
@@ -514,34 +487,7 @@ export default function CaseStudiesPage() {
       />
 
       <div className="min-h-screen bg-black overflow-x-hidden relative">
-        {/* Scientific Background Elements */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-20 right-10 opacity-5">
-            <Database className="h-32 w-32 text-blue-400 transform rotate-12" />
-          </div>
-          <div className="absolute bottom-20 left-10 opacity-5">
-            <Layers className="h-40 w-40 text-green-400 transform -rotate-12" />
-          </div>
-          <div className="absolute inset-0 opacity-3">
-            <svg width="100%" height="100%" className="text-gray-600">
-              <defs>
-                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Dynamic Gradient Overlay */}
-        <div
-          className="fixed inset-0 opacity-10 pointer-events-none transition-all duration-1000 z-10"
-          style={{
-            background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.2), transparent 50%)`,
-          }}
-        />
-
+        <PageBackground />
         {/* Header */}
         <header className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-xs md:max-w-2xl lg:max-w-4xl xl:max-w-7xl bg-black/30 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/10 shadow-2xl">
           <div className="px-4 py-3 md:px-6 md:py-4">
@@ -953,26 +899,7 @@ export default function CaseStudiesPage() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-20 bg-black text-white relative overflow-hidden border-t border-gray-800/50">
-          <div className="container mx-auto px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-8">
-              <Link href="/" className="text-3xl font-extralight hover:text-blue-400 transition-colors duration-300">
-                Physiogen
-              </Link>
-              <p className="text-gray-300 font-light max-w-3xl mx-auto text-lg">
-                Advancing human movement science through evidence-based clinical practice, comprehensive data analysis,
-                and innovative therapeutic interventions.
-              </p>
-              <div className="border-t border-gray-700 pt-8 text-gray-400 font-light">
-                <p>
-                  &copy; 2024 Physiogen Clinical Sciences. All rights reserved. Licensed healthcare facility providing
-                  evidence-based rehabilitation services and clinical research.
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   )

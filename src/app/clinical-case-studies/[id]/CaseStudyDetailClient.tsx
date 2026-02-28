@@ -21,7 +21,8 @@ import {
   MapPin,
 } from "lucide-react"
 import { CaseStudy } from "./case-study-types"
-import Head from "next/head"
+import { PageBackground } from "@/components/PageBackground"
+import Footer from "@/components/Footer"
 
 // Comprehensive detailed case studies data
 const detailedCaseStudies: { [key: string]: CaseStudy } = {
@@ -337,7 +338,6 @@ const detailedCaseStudies: { [key: string]: CaseStudy } = {
 
 export default function CaseStudyDetailClient({ id }: { id: string }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null)
 
   // Generate enhanced structured data for SEO
@@ -434,14 +434,7 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
   }
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
     setIsVisible(true)
-
-    // Load case study data
     const study = detailedCaseStudies[id]
     if (study) {
       setCaseStudy(study)
@@ -479,10 +472,6 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
         successRate: 0,
       })
     }
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
   }, [id])
 
   if (!caseStudy) {
@@ -493,35 +482,7 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
 
   return (
     <>
-      {/* Enhanced SEO Meta Tags */}
-      <Head>
-        <title>{`${caseStudy.title} - Clinical Case Study | Physiogen`}</title>
-        <meta 
-          name="description" 
-          content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate. Evidence-based rehabilitation outcomes from Physiogen Clinical Sciences.`} 
-        />
-        <meta 
-          name="keywords" 
-          content={`${caseStudy.patient.condition.toLowerCase()}, ${caseStudy.specialty.toLowerCase()}, clinical case study, physiotherapy outcomes, rehabilitation science, evidence-based treatment, Lahore physiotherapy`} 
-        />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://physiogen.fit/clinical-case-studies/${id}`} />
-        
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={`${caseStudy.title} - Clinical Case Study`} />
-        <meta property="og:description" content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate.`} />
-        <meta property="og:url" content={`https://physiogen.fit/clinical-case-studies/${id}`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content="/case-study-og.jpg" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${caseStudy.title} - Clinical Case Study`} />
-        <meta name="twitter:description" content={`${caseStudy.patient.condition} - ${caseStudy.specialty} case study with ${caseStudy.successRate}% success rate.`} />
-        <meta name="twitter:image" content="/case-study-og.jpg" />
-      </Head>
-      
-      {/* Structured Data for SEO */}
+      {/* Structured Data for SEO (page metadata is in [id]/page.tsx generateMetadata) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -548,76 +509,8 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
       )}
       
       <div className="min-h-screen bg-black overflow-x-hidden relative">
-      {/* Scientific Background Elements */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-20 right-10 opacity-5">
-          <svg width="200" height="400" viewBox="0 0 200 400" className="text-blue-400">
-            <path
-              d="M50 0 Q100 50 50 100 Q0 150 50 200 Q100 250 50 300 Q0 350 50 400"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M150 0 Q100 50 150 100 Q200 150 150 200 Q100 250 150 300 Q200 350 150 400"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-            />
-            {[...Array(8)].map((_, i) => (
-              <line
-                key={i}
-                x1="50"
-                y1={i * 50 + 25}
-                x2="150"
-                y2={i * 50 + 25}
-                stroke="currentColor"
-                strokeWidth="1"
-                opacity="0.3"
-              />
-            ))}
-          </svg>
-        </div>
-
-        <div className="absolute bottom-20 left-10 opacity-5">
-          <svg width="300" height="300" viewBox="0 0 300 300" className="text-green-400">
-            <circle cx="150" cy="150" r="8" fill="currentColor" />
-            <circle cx="100" cy="100" r="6" fill="currentColor" />
-            <circle cx="200" cy="100" r="6" fill="currentColor" />
-            <circle cx="100" cy="200" r="6" fill="currentColor" />
-            <circle cx="200" cy="200" r="6" fill="currentColor" />
-            <circle cx="50" cy="150" r="4" fill="currentColor" />
-            <circle cx="250" cy="150" r="4" fill="currentColor" />
-            <line x1="150" y1="150" x2="100" y2="100" stroke="currentColor" strokeWidth="2" />
-            <line x1="150" y1="150" x2="200" y2="100" stroke="currentColor" strokeWidth="2" />
-            <line x1="150" y1="150" x2="100" y2="200" stroke="currentColor" strokeWidth="2" />
-            <line x1="150" y1="150" x2="200" y2="200" stroke="currentColor" strokeWidth="2" />
-            <line x1="100" y1="100" x2="50" y2="150" stroke="currentColor" strokeWidth="1" />
-            <line x1="200" y1="100" x2="250" y2="150" stroke="currentColor" strokeWidth="1" />
-          </svg>
-        </div>
-
-        <div className="absolute inset-0 opacity-3">
-          <svg width="100%" height="100%" className="text-gray-600">
-            <defs>
-              <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-      </div>
-
-      {/* Dynamic Gradient Overlay */}
-      <div
-        className="fixed inset-0 opacity-10 pointer-events-none transition-all duration-1000 z-10"
-        style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.2), transparent 50%)`,
-        }}
-      />
-
-      {/* Header */}
+        <PageBackground />
+        {/* Header */}
       <header className="fixed top-2 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-7xl bg-black/50 backdrop-blur-2xl z-40 transition-all duration-500 rounded-2xl border border-white/20 shadow-2xl">
         <div className="px-3 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between h-12 sm:h-16">
@@ -1001,26 +894,7 @@ export default function CaseStudyDetailClient({ id }: { id: string }) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 bg-black text-white relative overflow-hidden border-t border-gray-800/50">
-        <div className="container mx-auto px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <Link href="/" className="text-3xl font-extralight hover:text-blue-400 transition-colors duration-300">
-              Physiogen
-            </Link>
-            <p className="text-gray-300 font-light max-w-3xl mx-auto text-lg">
-              Advancing human movement science through evidence-based clinical practice, innovative therapeutic
-              interventions, and comprehensive rehabilitation protocols.
-            </p>
-            <div className="border-t border-gray-700 pt-8 text-gray-400 font-light">
-              <p>
-                &copy; 2024 Physiogen Clinical Sciences. All rights reserved. Licensed healthcare facility providing
-                evidence-based rehabilitation services.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
     </>
   )

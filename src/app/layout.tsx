@@ -78,7 +78,11 @@ export const metadata: Metadata = {
     telephone: true,
     email: true,
     address: true
-  }
+  },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 // Organization structured data
@@ -129,7 +133,7 @@ const organizationJsonLd = {
   "founder": {
     "@type": "Person",
     "name": "Dr. Muhammad Mubarak Janjua",
-    "jobTitle": "Founder & CEO, Sports Physiotherapy Specialist",
+    "jobTitle": "Sports Specialist",
     "description": "PT, MSSPT - HCPC (UK) Licensed | Bronze Medalist | Certified Sports Physiotherapist",
     "knowsAbout": ["Sports Physiotherapy", "Sports Injury Rehabilitation", "Athletic Performance Optimization"]
   }
@@ -143,26 +147,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4LQJ2ZHHW"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-C4LQJ2ZHHW');
-            `,
-          }}
-        />
-        
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
-        
-        {/* Preconnect to important domains */}
+        {/* Preconnect for next/font Google (required for font loading) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         

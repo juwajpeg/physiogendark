@@ -114,7 +114,7 @@ export default function PhysiogenFit() {
     "founder": {
       "@type": "Person",
       "name": "Dr. Muhammad Mubarak Janjua",
-      "jobTitle": "Founder & CEO",
+      "jobTitle": "Sports Specialist",
       "description": "PT, MSSPT - HCPC (UK) Licensed | Bronze Medalist",
       "knowsAbout": ["Sports Physiotherapy", "Sports Injury Rehabilitation", "Athletic Performance Optimization"]
     }
@@ -375,7 +375,7 @@ export default function PhysiogenFit() {
     },
     {
       name: "Dr. Muhammad Mubarak Janjua, PT, MSSPT",
-      role: "Founder & CEO – Physiogen | Sports Physiotherapy Specialist",
+      role: "Sports Specialist",
       specialty: "Sports Physiotherapy | Athletic Performance | Rehabilitation",
       credentials: "HCPC (UK) Licensed | Bronze Medalist | Certified Sports Physiotherapist",
       gradient: "from-orange-500 to-red-500",
