@@ -21,7 +21,7 @@ export default function Footer() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.label}
-                href={item.section && !isHome ? `/${item.href}` : item.href}
+                href={"section" in item && item.section && !isHome ? `/${item.href}` : item.href}
                 className="hover:text-white transition-all duration-300 hover:scale-110 relative group"
               >
                 {item.label}
