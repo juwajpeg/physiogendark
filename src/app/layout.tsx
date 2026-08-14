@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleTagManager from "@/components/GoogleTagManager";
@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://physiogen.fit"),
   title: {
     default: "Physiogen - Sports Physiotherapy & Rehabilitation Science | Lahore, Pakistan",
     template: "%s | Physiogen - Sports Physiotherapy Specialists"
@@ -79,10 +80,12 @@ export const metadata: Metadata = {
     email: true,
     address: true
   },
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
 };
 
 // Organization structured data
@@ -147,13 +150,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         
         {/* Preload critical assets */}
         <link rel="preload" href="/muhammad.svg" as="image" />

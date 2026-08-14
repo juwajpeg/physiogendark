@@ -1,5 +1,6 @@
 import CaseStudyDetailClient from "./CaseStudyDetailClient"
 import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 // Generate metadata for individual case study pages
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       type: 'article',
       images: [
         {
-          url: '/case-study-og.jpg',
+          url: '/og-image.jpg',
           width: 1200,
           height: 630,
           alt: `${caseStudyData.title} - Clinical Case Study`,
@@ -48,13 +49,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       card: 'summary_large_image',
       title: `${caseStudyData.title} - Clinical Case Study`,
       description: `${caseStudyData.patient.condition} - ${caseStudyData.specialty} case study with ${caseStudyData.successRate}% success rate.`,
-      images: ['/case-study-og.jpg'],
+      images: ['/og-image.jpg'],
     },
     alternates: {
       canonical: `https://physiogen.fit/clinical-case-studies/${id}`,
     },
   }
 }
+
+const CASE_STUDY_IDS = ["CS000001", "CS000002"] as const
 
 // Helper function to get case study data
 function getCaseStudyData(id: string) {
@@ -88,7 +91,14 @@ function getCaseStudyData(id: string) {
   return caseStudies[id as keyof typeof caseStudies]
 }
 
+export function generateStaticParams() {
+  return CASE_STUDY_IDS.map((id) => ({ id }))
+}
+
 export default async function CaseStudyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+  if (!getCaseStudyData(id)) {
+    notFound()
+  }
   return <CaseStudyDetailClient id={id} />
 }
