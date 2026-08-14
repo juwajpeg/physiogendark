@@ -12,7 +12,9 @@ export default function Footer() {
     <footer className="py-20 bg-black text-white relative overflow-hidden border-t border-gray-800/50">
       <div className="container mx-auto px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div className="text-3xl font-extralight">Physiogen</div>
+          <Link href="/" className="inline-block text-3xl font-extralight hover:text-blue-400 transition-colors duration-300">
+            Physiogen
+          </Link>
           <p className="text-gray-300 font-light max-w-3xl mx-auto text-lg">
             Advancing human movement science through evidence-based clinical practice, innovative therapeutic
             interventions, and comprehensive rehabilitation protocols.
@@ -31,7 +33,7 @@ export default function Footer() {
           </div>
           <div className="border-t border-gray-700 pt-8 text-gray-400 font-light">
             <p>
-              &copy; 2024 Physiogen Clinical Sciences. All rights reserved. Licensed healthcare facility providing
+              &copy; {new Date().getFullYear()} Physiogen Clinical Sciences. All rights reserved. Licensed healthcare facility providing
               evidence-based rehabilitation services.
             </p>
           </div>

@@ -22,13 +22,13 @@ export const metadata: Metadata = {
       "Explore evidence-based clinical case studies from Physiogen. Real patient outcomes in ACL reconstruction recovery, pediatric cerebral palsy, sports medicine, and neurological rehabilitation.",
     url: "https://physiogen.fit/clinical-case-studies",
     type: "website",
-    images: [{ url: "https://physiogen.fit/case-studies-og.jpg" }],
+    images: [{ url: "https://physiogen.fit/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Clinical Case Studies - Evidence-Based Rehabilitation Outcomes",
     description: "Explore evidence-based clinical case studies from Physiogen. Real patient outcomes in rehabilitation science.",
-    images: ["https://physiogen.fit/case-studies-og.jpg"],
+    images: ["https://physiogen.fit/og-image.jpg"],
   },
 }
 
