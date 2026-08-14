@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Head from "next/head"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { trackPhoneClick } from "@/lib/gtm"
+import Footer from "@/components/Footer"
 
 // Dynamically import heavy components
 const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
@@ -408,41 +408,14 @@ export default function PhysiogenFit() {
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden relative">
-      {/* SEO Head Content */}
-      <Head>
-        <title>Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists | Lahore, Pakistan</title>
-        <meta name="description" content="Leading sports physiotherapy and rehabilitation science clinic in Lahore, Pakistan. Specialized sports injury assessment and rehabilitation by certified sports physio specialists. 15+ years of clinical excellence with 98% treatment efficacy." />
-        <meta name="keywords" content="sports physiotherapy Lahore, sports injury rehabilitation, sports medicine, athletic performance optimization, return-to-play assessment, physiotherapy Pakistan, rehabilitation science, neurological rehabilitation, women's health physiotherapy, evidence-based treatment" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://physiogen.fit" />
-        
-        {/* Open Graph Tags */}
-        <meta property="og:title" content="Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists" />
-        <meta property="og:description" content="Leading sports physiotherapy clinic in Lahore, Pakistan. Specialized sports injury rehabilitation by certified specialists with advanced techniques for athletes at all levels." />
-        <meta property="og:url" content="https://physiogen.fit" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://physiogen.fit/clinic-image.jpg" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Physiogen - Sports Physiotherapy Specialists" />
-        <meta name="twitter:description" content="Leading sports physiotherapy clinic in Lahore with certified specialists for sports injury rehabilitation and athletic performance optimization." />
-        <meta name="twitter:image" content="https://physiogen.fit/clinic-image.jpg" />
-        
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqsStructuredData) }}
-        />
-      </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqsStructuredData) }}
+      />
       
       {/* Structured Data for SEO */}
       <script
@@ -1340,55 +1313,7 @@ export default function PhysiogenFit() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 bg-black text-white relative overflow-hidden border-t border-gray-800/50">
-        <div className="absolute inset-0 bg-black" />
-
-        {/* Background Scientific Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 right-20">
-            <Dna className="h-20 w-20 text-white" />
-          </div>
-          <div className="absolute bottom-10 left-20">
-            <Microscope className="h-16 w-16 text-white" />
-          </div>
-        </div>
-
-        <div className="container mx-auto px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="text-3xl font-extralight">Physiogen</div>
-            <p className="text-gray-300 font-light max-w-3xl mx-auto text-lg">
-              Advancing human movement science through evidence-based clinical practice, innovative therapeutic
-              interventions, and comprehensive rehabilitation protocols.
-            </p>
-            <div className="flex flex-wrap justify-center gap-12 text-gray-300 font-light">
-              {[
-                "Clinical Services",
-                "Treatment Protocol",
-                "Clinical Team",
-                "Case Studies",
-                "Location",
-                "Consultation",
-              ].map((item) => (
-                <Link
-                  key={item}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  className="hover:text-white transition-all duration-300 hover:scale-110 relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ))}
-            </div>
-            <div className="border-t border-gray-700 pt-8 text-gray-400 font-light">
-              <p>
-                &copy; 2024 Physiogen Clinical Sciences. All rights reserved. Licensed healthcare facility providing
-                evidence-based rehabilitation services.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Lazy loaded components for better performance */}
       <DynamicBanner isVisible={bannerVisible} onClose={() => setBannerVisible(false)} />
