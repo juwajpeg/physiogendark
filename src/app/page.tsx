@@ -367,7 +367,7 @@ export default function PhysiogenFit() {
 
   const clinicalTeam = [
     {
-      name: "Dr. Taseen Mansoor, PT",
+      name: "Dr. Taseen Mansoor, DPT",
       role: "CEO – Physiogen | Neuro Rehabilitation Specialist",
       specialty: "Neurological Conditions | Lower Back Specialist | Hijama",
       credentials: "Chiropractic Techniques & KT Taping Expert",
@@ -383,16 +383,16 @@ export default function PhysiogenFit() {
       image: "/Amna.svg"
     },
     {
-      name: "Dr. Bisma Khan, DPT",
+      name: "Dr. Minahil Asad, DPT",
       role: "Outpatient Physiotherapy Specialist",
-      specialty: "Women's Health | Pediatric Physical Therapy",
+      specialty: "Women's Health | Geriatric Physical Therapy",
       credentials: "Clinical Rehabilitation & Movement Science",
       gradient: "from-purple-500 to-pink-500",
-      image: "/Bisma.svg",
+      image: "/Minahil.svg",
       tagline: "Restoring Function with Compassionate Care",
     },
     {
-      name: "Dr. Muhammad Mubarak Janjua, PT, MSSPT",
+      name: "Dr. Muhammad bin Mubarak, PT, MSSPT",
       role: "Sports Specialist",
       specialty: "Sports Physiotherapy | Athletic Performance | Rehabilitation",
       credentials: "HCPC (UK) Licensed | Bronze Medalist | Certified Sports Physiotherapist",
