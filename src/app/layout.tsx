@@ -75,11 +75,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Dr. Muhammad Mubarak Janjua, Sports Physiotherapy Specialist" }],
   creator: "Dr. Muhammad Mubarak Janjua",
   publisher: "Physiogen Clinical Sciences",
-  formatDetection: {
-    telephone: true,
-    email: true,
-    address: true
-  },
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
@@ -146,13 +141,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         
@@ -166,7 +162,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <GoogleTagManager gtmId="GTM-NJ34DT9G" />
         {children}
       </body>

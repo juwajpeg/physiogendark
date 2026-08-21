@@ -1,0 +1,40 @@
+{
+  "summary": "Frontend-only testing of the Next.js 15 Physiogen marketing site to verify the hydration mismatch fix (removed formatDetection metadata, added static format-detection meta, added suppressHydrationWarning). All critical checks PASSED. Homepage loads on both desktop (1920x800) and mobile (390x844 with iOS Safari UA); hero heading 'Guaranteed Pain Relief' renders in both viewports (screenshots confirm). ZERO React hydration errors/warnings observed in browser console across homepage, /clinical-case-studies, and /clinical-case-studies/CS000001. Only benign warnings present: woff2 font preload not-used-within-window-load (Next.js font optimization heuristic, not a bug) and a couple of SVG preload notices on case studies. Exactly one <meta name='format-detection'> tag present with content 'telephone=no, date=no, address=no, email=no'. Mobile hamburger opens the nav drawer with all links. Phone/WhatsApp CTAs present (8 links including tel:00923137818887 and https://wa.me/923137818887). All three tested routes return HTTP 200. No Next.js dev error dialog present on mobile.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Homepage (both desktop & mobile)", "issues": ["'Special Promotion' modal auto-opens on load and covers the hero on first paint; consider delaying it or making it dismissible via ESC + backdrop click. Not a bug, minor UX."]}
+    ]
+  },
+  "console_warnings_verbatim": [
+    "[warning] The resource /_next/static/media/7d4881bb7e1bf84d-s.p.woff2 was preloaded using link preload but not used within a few seconds from the window's load event.",
+    "[warning] The resource /_next/static/media/22a5144ee8d83bca-s.p.woff2 was preloaded using link preload but not used within a few seconds from the window's load event.",
+    "[warning] /Bisma.svg preloaded but not used within a few seconds (case studies pages)",
+    "[warning] /muhammad.svg preloaded but not used within a few seconds (case studies pages)"
+  ],
+  "hydration_check": {
+    "desktop_home": "PASS - 0 hydration warnings/errors",
+    "mobile_home_ios_ua": "PASS - 0 hydration warnings/errors",
+    "case_studies_list": "PASS - 0 hydration warnings/errors",
+    "case_study_detail_CS000001": "PASS - 0 hydration warnings/errors"
+  },
+  "meta_format_detection": "PASS - exactly 1 tag with content 'telephone=no, date=no, address=no, email=no'",
+  "http_status": {"/": 200, "/clinical-case-studies": 200, "/clinical-case-studies/CS000001": 200},
+  "test_report_links": [],
+  "action_items": [
+    "Optional: investigate why several woff2/SVG assets are preloaded but not consumed within window.load; either remove the preload hints or ensure they are actually used above-the-fold to eliminate the console warning noise."
+  ],
+  "critical_code_review_comments": [
+    "Fix for hydration bug is effective and verified across viewports and routes.",
+    "Consider adding data-testid attributes to key elements (hero heading, mobile menu toggle, phone/WhatsApp CTAs, promo modal close) to make future automated regression tests more robust."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (no backend)", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "This is a pure Next.js 15 App Router app at /app (not the standard React+FastAPI stack). Runs via next dev on port 3000. Test URL: https://534b4735-6e64-4da7-8e77-8e3bbd196567.preview.emergentagent.com . A 'Special Promotion' modal auto-opens on the homepage and can obstruct selectors — dismiss it (button[aria-label*='close']) before interacting with hero content. Hero heading text spans two lines/spans ('Guaranteed' + 'Pain Relief'); use screenshot verification or evaluate innerHTML rather than innerText contains.",
+  "rca of the issue": "Original hydration mismatch was caused by iOS Safari's format-detection auto-linking of phone numbers/emails/addresses/dates injecting <a> tags into SSR-rendered content, changing the DOM before React hydrated. Fix removed the conflicting formatDetection metadata block from layout.tsx, added a single explicit <meta name='format-detection' content='telephone=no, date=no, address=no, email=no'> to disable all auto-linking uniformly, and added suppressHydrationWarning on <html>/<body> as a safety net. Verified: zero hydration console messages under iOS Safari UA on 390x844 viewport."
+}
