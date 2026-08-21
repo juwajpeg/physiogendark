@@ -1,0 +1,36 @@
+{
+  "summary": "Regression test after switching Next.js app to static-export config (output:'export', generateStaticParams for [id], force-static sitemap/robots, GH Actions workflow, .nojekyll). Running `next dev` site at the preview URL still works correctly with ZERO hydration errors across all viewports and routes. Homepage renders correctly on desktop (1920x1080) and iOS mobile (390x844, iPhone Safari UA); hero 'Guaranteed Pain Relief' visible in both. /clinical-case-studies renders (2 cards: CS000001 Post-Surgical ACL, CS000002 Pediatric Cerebral Palsy) with stats (2 Total Cases, 93.5% success). /clinical-case-studies/CS000001 detail page loads (body ~7.2KB). Exactly ONE <meta name='format-detection'> tag present with correct content 'telephone=no, date=no, address=no, email=no'. No Next.js error dialog on mobile (initial false-positive was the dev-mode `nextjs-portal` toolbar element, not `[data-nextjs-dialog-overlay]`; explicit check confirms no error dialog and no 'Unhandled Runtime Error'/'Server Error' text). Nav link 'Case Studies' navigates correctly from homepage to /clinical-case-studies. Case cards on list are not <a> tags (no anchor found matching CS000 href) — they navigate via onClick handler; direct URL routes to detail pages work fine, so this is only a minor test-selector observation, not a bug.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "hydration_check": {
+    "desktop_home_1920x1080": "PASS - 0 hydration warnings/errors (3 benign console msgs)",
+    "mobile_home_390x844_ios_ua": "PASS - 0 hydration warnings/errors, no error dialog",
+    "case_studies_list": "PASS - 0 hydration warnings/errors",
+    "case_study_detail_CS000001": "PASS - 0 hydration warnings/errors"
+  },
+  "meta_format_detection": "PASS - exactly 1 tag, content='telephone=no, date=no, address=no, email=no'",
+  "navigation_check": {
+    "home_to_case_studies_via_nav": "PASS",
+    "case_card_click_to_detail": "Case cards are buttons/onClick handlers, not <a href>; direct URL to /clinical-case-studies/CS000001 renders correctly (body ~7253 chars). Consider making cards <Link> for progressive enhancement + better crawlability now that site is a static export."
+  },
+  "static_export_readiness": "next.config.ts output:'export', images.unoptimized:true, generateStaticParams(CS000001, CS000002) + dynamicParams=false on [id]/page.tsx, force-static on sitemap.ts/robots.ts, public/.nojekyll + .github/workflows/nextjs.yml are all in place per problem statement. Live dev site behavior is unchanged and hydration-clean, so the regression is safe.",
+  "test_report_links": [],
+  "action_items": [
+    "Optional: convert case-study list cards to Next.js <Link href='/clinical-case-studies/CS000001'> anchors so clicks work without JS and crawlers can follow them on the static GH Pages export.",
+    "Optional (carried over from iter_1): remove/fix unused woff2 & svg preloads to eliminate console preload warnings."
+  ],
+  "critical_code_review_comments": [
+    "Static-export migration looks correct; dynamicParams=false on [id] means only CS000001/CS000002 are generated — any future case ID must be added to generateStaticParams or the route will 404 on GH Pages.",
+    "Cards not being <a> tags is a mild SEO/a11y concern on a static site; users with JS disabled can't navigate to case detail pages."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Pure Next.js 15 App Router at /app (not React+FastAPI). Runs via next dev on port 3000. Preview URL: https://534b4735-6e64-4da7-8e77-8e3bbd196567.preview.emergentagent.com . `nextjs-portal` element is ALWAYS present in dev mode (dev toolbar) — do NOT treat it as an error overlay; use `[data-nextjs-dialog-overlay]` or `[data-nextjs-dialog]` for real errors. Homepage has an auto-opening 'Special Promotion' modal after ~7s — dismiss with button[aria-label*='close' i] before interacting with hero. Case cards on /clinical-case-studies are onClick handlers, not <a> tags — navigate by direct URL or click card element rather than searching for anchors. Only 2 case IDs exist statically: CS000001, CS000002."
+}

@@ -1,6 +1,13 @@
 import CaseStudyDetailClient from "./CaseStudyDetailClient"
 import { Metadata } from "next"
 
+// Only these case studies have detail pages; pre-render them for static export
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return [{ id: "CS000001" }, { id: "CS000002" }]
+}
+
 // Generate metadata for individual case study pages
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params

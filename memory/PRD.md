@@ -35,3 +35,23 @@ Lives directly in /app (not the standard React+FastAPI layout).
 - Preload hints for some woff2/SVG assets fire "preloaded but not used" console warnings (noise).
 - "Special Promotion" modal auto-opens on load and covers hero on first paint (UX).
 - Few data-testid attributes — add for robust regression tests.
+
+### 2026-06 — Bug: GitHub Pages build failing (Jekyll)
+- GitHub Pages was auto-building the repo with the Jekyll builder (actions/jekyll-build-pages),
+  crashing on assets/css/style.scss because there was no docs/ folder — Jekyll is wrong for a Next.js app.
+- Fix: migrate to static export + a proper GitHub Actions Pages deploy.
+  * next.config.ts: output:'export', images.unoptimized:true.
+  * src/app/clinical-case-studies/[id]/page.tsx: generateStaticParams(CS000001,CS000002) + dynamicParams=false.
+  * src/app/sitemap.ts + robots.ts: export const dynamic='force-static'.
+  * .github/workflows/nextjs.yml: build static export (./out) and deploy via configure-pages/deploy-pages.
+  * public/.nojekyll added.
+- `next build` static export succeeds -> ./out (index.html, clinical-case-studies[/CS000001|CS000002].html,
+  robots.txt, sitemap.xml, .nojekyll). Dev preview still runs on :3000.
+- VERIFIED by testing agent (iteration_2): 100% frontend, 0 hydration errors, nav works.
+- ACTION REQUIRED BY USER (repo settings): GitHub → Settings → Pages → Source = "GitHub Actions"
+  (so the new workflow runs instead of the default Jekyll build). If using a custom domain
+  (physiogen.fit) keep the CNAME/Pages custom domain; basePath stays empty. For the project URL
+  <user>.github.io/physiogendark, configure-pages injects the basePath automatically.
+
+## Backlog (added)
+- Make case-study list cards real <Link> anchors (crawlability / works without JS on static export).

@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Emergent preview runner (environment-only, not part of the app)
 /frontend/
+.env
+.env.*
+*.env
+credentials.json
+*.key
+.credentials

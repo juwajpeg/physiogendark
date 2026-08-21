@@ -367,7 +367,7 @@ export default function PhysiogenFit() {
 
   const clinicalTeam = [
     {
-      name: "Dr. Taseen Mansoor",
+      name: "Dr. Taseen Mansoor, PT",
       role: "CEO – Physiogen | Neuro Rehabilitation Specialist",
       specialty: "Neurological Conditions | Lower Back Specialist | Hijama",
       credentials: "Chiropractic Techniques & KT Taping Expert",
