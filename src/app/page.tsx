@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import Head from "next/head"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
@@ -52,10 +51,9 @@ export default function PhysiogenFit() {
   const [docHeight, setDocHeight] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const [activeSection, setActiveSection] = useState(0)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [headerVisible, setHeaderVisible] = useState(true)
-  // Add missing state for banner and modal visibility
+  const gradientRef = useRef<HTMLDivElement>(null)
+  const headerVisible = true
+  // Banner and modal visibility
   const [bannerVisible, setBannerVisible] = useState(true)
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -213,18 +211,17 @@ export default function PhysiogenFit() {
   }
 
   useEffect(() => {
-    const handleScroll = () => {
+    let scrollTicking = false
+    let mouseTicking = false
+    let mouseX = 0
+    let mouseY = 0
+
+    const updateScroll = () => {
       const currentScrollY = window.scrollY
       setScrollY(currentScrollY)
 
-      // Keep header visible on all devices for floating effect
-      setHeaderVisible(true)
-
-      setLastScrollY(currentScrollY)
-
       const sections = document.querySelectorAll("section")
       const scrollPosition = currentScrollY + 200
-
       sections.forEach((section, index) => {
         const sectionTop = section.offsetTop
         const sectionHeight = section.offsetHeight
@@ -232,16 +229,37 @@ export default function PhysiogenFit() {
           setActiveSection(index)
         }
       })
+      scrollTicking = false
+    }
+
+    const handleScroll = () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(updateScroll)
+        scrollTicking = true
+      }
+    }
+
+    // Update the cursor-follow gradient via ref (no React re-render on every mouse move)
+    const updateGradient = () => {
+      if (gradientRef.current) {
+        gradientRef.current.style.background = `radial-gradient(800px circle at ${mouseX}px ${mouseY}px, rgba(59, 130, 246, 0.2), transparent 50%)`
+      }
+      mouseTicking = false
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      mouseX = e.clientX
+      mouseY = e.clientY
+      if (!mouseTicking) {
+        window.requestAnimationFrame(updateGradient)
+        mouseTicking = true
+      }
     }
 
     const calcDocHeight = () => setDocHeight(document.documentElement.scrollHeight - window.innerHeight)
 
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
     window.addEventListener("resize", calcDocHeight)
 
     calcDocHeight() // initialise once DOM is available
@@ -252,7 +270,7 @@ export default function PhysiogenFit() {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("resize", calcDocHeight)
     }
-  }, [lastScrollY])
+  }, [])
 
   const clinicalServices = [
     {
@@ -384,7 +402,7 @@ export default function PhysiogenFit() {
     },
   ]
 
-  // Static case studies data
+  // Case-study previews — kept in sync with the case-study database (see /clinical-case-studies)
   const clinicalOutcomes = [
     {
       title: "Post-Surgical ACL Reconstruction Recovery",
@@ -393,61 +411,27 @@ export default function PhysiogenFit() {
       id: "CS000001"
     },
     {
-      title: "Chronic Lower Back Pain Management",
-      Demographics: "Female, 42 years, Office Worker",
-      "Doctors notes": "Significant pain reduction and improved functional capacity through targeted core strengthening and ergonomic modifications.",
-      id: "CS000002"
-    },
-    {
       title: "Pediatric Cerebral Palsy Motor Development",
       Demographics: "Female, 8 years, Student",
       "Doctors notes": "Remarkable improvement in gross motor skills and functional independence through consistent neurodevelopmental therapy.",
-      id: "CS000003"
+      id: "CS000002"
     }
   ]
 
   return (
     <div className="min-h-screen bg-black overflow-x-hidden relative">
-      {/* SEO Head Content */}
-      <Head>
-        <title>Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists | Lahore, Pakistan</title>
-        <meta name="description" content="Leading sports physiotherapy and rehabilitation science clinic in Lahore, Pakistan. Specialized sports injury assessment and rehabilitation by certified sports physio specialists. 15+ years of clinical excellence with 98% treatment efficacy." />
-        <meta name="keywords" content="sports physiotherapy Lahore, sports injury rehabilitation, sports medicine, athletic performance optimization, return-to-play assessment, physiotherapy Pakistan, rehabilitation science, neurological rehabilitation, women's health physiotherapy, evidence-based treatment" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://physiogen.fit" />
-        
-        {/* Open Graph Tags */}
-        <meta property="og:title" content="Physiogen - Sports Physiotherapy & Rehabilitation Science Specialists" />
-        <meta property="og:description" content="Leading sports physiotherapy clinic in Lahore, Pakistan. Specialized sports injury rehabilitation by certified specialists with advanced techniques for athletes at all levels." />
-        <meta property="og:url" content="https://physiogen.fit" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://physiogen.fit/clinic-image.jpg" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Physiogen - Sports Physiotherapy Specialists" />
-        <meta name="twitter:description" content="Leading sports physiotherapy clinic in Lahore with certified specialists for sports injury rehabilitation and athletic performance optimization." />
-        <meta name="twitter:image" content="https://physiogen.fit/clinic-image.jpg" />
-        
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqsStructuredData) }}
-        />
-      </Head>
-      
-      {/* Structured Data for SEO */}
+      {/* Structured Data for SEO (App Router renders JSON-LD in the body) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqsStructuredData) }}
       />
       
       {/* Scientific Background Elements */}
@@ -542,12 +526,10 @@ export default function PhysiogenFit() {
         </div>
       </div>
 
-      {/* Dynamic Gradient Overlay */}
+      {/* Dynamic Gradient Overlay (updated imperatively via ref to avoid re-renders) */}
       <div
-        className="fixed inset-0 opacity-10 pointer-events-none transition-all duration-1000 z-10"
-        style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.2), transparent 50%)`,
-        }}
+        ref={gradientRef}
+        className="fixed inset-0 opacity-10 pointer-events-none z-10"
       />
 
       {/* Progress Indicator */}
