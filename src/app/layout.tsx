@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://physiogen.fit"),
   title: {
     default: "Physiogen - Sports Physiotherapy & Rehabilitation Science | Lahore, Pakistan",
     template: "%s | Physiogen - Sports Physiotherapy Specialists"
