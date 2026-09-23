@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Calendar, X } from "lucide-react";
 
 interface PromotionBannerProps {
@@ -41,21 +42,12 @@ export default function PromotionBanner({ isVisible = true, onClose }: Promotion
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <a 
-                href="tel:03137818887" 
-                className="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-md text-white transition-all duration-300 hidden sm:block"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && window.dataLayer) {
-                    window.dataLayer.push({
-                      event: 'phone_click',
-                      phone_number: '03137818887',
-                      location: 'Banner'
-                    });
-                  }
-                }}
+              <Link 
+                href="/doctors" 
+                className="text-xs bg-blue-600 hover:bg-blue-700 px-3.5 py-1.5 rounded-md text-white transition-all duration-300 hidden sm:block font-medium"
               >
-                Book Now
-              </a>
+                Book Specialist
+              </Link>
               <button 
                 onClick={handleClose}
                 className="text-gray-400 hover:text-white transition-colors duration-300 p-1 rounded-full hover:bg-gray-800/50"

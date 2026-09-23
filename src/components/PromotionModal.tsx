@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { X, Calendar, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -88,30 +89,29 @@ export default function PromotionModal({ isOpen = false, onClose }: PromotionMod
           {/* Modal Footer */}
           <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 p-5 border-t border-gray-700/30">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <a 
-                  href="tel:03137818887" 
-                  className="block"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && window.dataLayer) {
-                      window.dataLayer.push({
-                        event: 'phone_click',
-                        phone_number: '03137818887',
-                        location: 'Modal'
-                      });
-                    }
-                  }}
-                >
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-2 rounded-xl transition-all duration-300 shadow-lg">
-                    <Phone className="mr-2 h-4 w-4" />
-                    Call Now
-                  </Button>
-                </a>
-              <Button 
-                onClick={handleClose} 
-                className="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-5 py-2 rounded-xl transition-all duration-300 border border-gray-700"
+              <Link href="/doctors" onClick={handleClose} className="block">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-5 py-2.5 rounded-xl transition-all duration-300 shadow-lg font-medium text-sm">
+                  Book Specialist
+                </Button>
+              </Link>
+              <a 
+                href="tel:03137818887" 
+                className="block"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.dataLayer) {
+                    window.dataLayer.push({
+                      event: 'phone_click',
+                      phone_number: '03137818887',
+                      location: 'Modal'
+                    });
+                  }
+                }}
               >
-                View Services
-              </Button>
+                <Button variant="outline" className="w-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white px-5 py-2.5 rounded-xl transition-all duration-300 border border-white/10 text-sm">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call Now
+                </Button>
+              </a>
             </div>
           </div>
         </div>

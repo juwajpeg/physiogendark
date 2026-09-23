@@ -7,6 +7,7 @@ import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { trackPhoneClick } from "@/lib/gtm"
+import ContactQueryForm from "@/components/ContactQueryForm"
 
 // Dynamically import heavy components
 const DynamicModal = dynamic(() => import("../components/PromotionModal"), { 
@@ -40,7 +41,6 @@ import {
   Dna,
   Stethoscope,
   Globe,
-  MessageCircle,
   Flower,
   Home,
 } from "lucide-react"
@@ -565,32 +565,33 @@ export default function PhysiogenFit() {
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10" />
             </Link>
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 ml-auto">
+            <nav className="hidden md:flex items-center justify-center gap-x-2 lg:gap-x-3 xl:gap-x-4 ml-auto whitespace-nowrap flex-nowrap overflow-x-auto">
               {[
-                "Clinical Services",
-                "Treatment Protocol",
-                "Clinical Team",
-                "Case Studies",
-                "Location",
-                "Consultation",
+                { label: "Clinical Services", href: "#clinical-services" },
+                { label: "Consultation", href: "#consultation" },
+                { label: "Treatment Protocol", href: "#treatment-protocol" },
+                { label: "Clinical Team", href: "#clinical-team" },
+                { label: "Case Studies", href: "/clinical-case-studies" },
+                { label: "Location", href: "#location" },
+                { label: "Book Appointment", href: "/doctors" },
               ].map((item, index) => (
                   <Link
-                    key={item}
-                    href={item === "Case Studies" ? "/clinical-case-studies" : `#${item.toLowerCase().replace(" ", "-")}`}
-                    className={`text-gray-200 hover:text-white transition-all duration-300 font-light relative group text-sm md:text-base px-2 md:px-3 py-1 md:py-2 rounded-lg hover:bg-white/10 ${
+                    key={item.label}
+                    href={item.href}
+                    className={`text-gray-200 hover:text-white transition-all duration-300 font-light relative group text-[10px] md:text-[11px] lg:text-xs xl:text-sm px-1.5 md:px-2 xl:px-3 py-1 md:py-2 rounded-lg hover:bg-white/10 whitespace-nowrap flex-shrink-0 ${
                       activeSection === index + 1 ? "text-white bg-white/20" : ""
                     }`}
                   >
-                    {item}
+                    {item.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-4 md:px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-xs md:text-sm shadow-lg">
+              <Link href="/doctors">
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-4 md:px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg text-xs md:text-sm shadow-lg text-white">
                   Schedule Assessment
                 </Button>
-              </a>
+              </Link>
             </nav>
             {/* Mobile Menu Button */}
             <button
@@ -608,28 +609,29 @@ export default function PhysiogenFit() {
           >
             <nav className="py-2 space-y-2 bg-black/20 backdrop-blur-sm rounded-xl mx-0 mb-2 p-2">
               {[
-                "Clinical Services",
-                "Treatment Protocol",
-                "Clinical Team",
-                "Case Studies",
-                "Location",
-                "Consultation",
+                { label: "Clinical Services", href: "#clinical-services" },
+                { label: "Consultation", href: "#consultation" },
+                { label: "Treatment Protocol", href: "#treatment-protocol" },
+                { label: "Clinical Team", href: "#clinical-team" },
+                { label: "Case Studies", href: "/clinical-case-studies" },
+                { label: "Location", href: "#location" },
+                { label: "Book Appointment", href: "/doctors" },
               ].map((item) => (
                   <Link
-                    key={item}
-                    href={item === "Case Studies" ? "/clinical-case-studies" : `#${item.toLowerCase().replace(" ", "-")}`}
+                    key={item.label}
+                    href={item.href}
                     className="block text-gray-200 hover:text-white transition-all duration-300 font-light transform hover:translate-x-2 text-sm md:text-base px-4 py-3 rounded-lg hover:bg-white/20 active:bg-white/30"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 ),
               )}
-              <a href="tel:00923137818887" className="block mt-2">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-xs md:text-sm shadow-lg py-3">
+              <Link href="/doctors" className="block mt-2" onClick={() => setIsMenuOpen(false)}>
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full w-full transition-all duration-300 hover:scale-105 text-xs md:text-sm shadow-lg py-3 text-white">
                   Schedule Assessment
                 </Button>
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
@@ -716,16 +718,16 @@ export default function PhysiogenFit() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="https://wa.me/923137818887" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex justify-center">
+                <Link href="/doctors" className="w-full sm:w-auto flex justify-center">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto"
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl group relative overflow-hidden w-full sm:w-auto text-white shadow-blue-500/20"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <MessageCircle className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
-                    Appointment
+                    <Calendar className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                    Book Appointment
                   </Button>
-                </a>
+                </Link>
                                                   <a 
                                     href="tel:03137818887" 
                                     className="w-full sm:w-auto flex justify-center"
@@ -991,56 +993,75 @@ export default function PhysiogenFit() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {clinicalTeam.map((clinician, index) => (
-                <Card
-                  key={index}
-                  className="group border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50"
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${clinician.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500`}
-                  />
-                  <CardContent className="p-8 text-center space-y-6 relative z-10">
-                    <div className="relative">
-                      {clinician.image ? (
-                        <Image
-                          src={clinician.image}
-                          alt={`${clinician.name} - Physiogen Clinical Specialist`}
-                          width={112}
-                          height={112}
-                          className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white shadow-lg group-hover:scale-110 transition-all duration-300"
-                        />
-                      ) : (
-                        <div
-                          className={`w-28 h-28 bg-gradient-to-r ${clinician.gradient} rounded-full mx-auto transition-all duration-300 group-hover:scale-110 flex items-center justify-center text-white text-2xl font-light shadow-lg`}
-                        >
-                          {clinician.name.split(" ")[0].charAt(0) + clinician.name.split(" ")[1].charAt(0)}
-                        </div>
-                      )}
-                      <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-lg border border-gray-700">
-                        <Award className="h-5 w-5 text-yellow-400" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-xl font-light text-white group-hover:text-blue-400 transition-colors duration-300">
-                          {clinician.name}
-                        </h3>
-                        <p className="text-blue-400 font-light text-sm mt-1">{clinician.role}</p>
-                      </div>
-                      <div className="space-y-2">
-                        <p className="text-gray-300 font-light text-sm">{clinician.specialty}</p>
-                        <div className="inline-flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded-full text-xs text-gray-300">
-                          <Stethoscope className="h-3 w-3" />
-                          <span>{clinician.credentials}</span>
-                        </div>
-                        {clinician.tagline && (
-                          <div className="text-pink-300 font-light text-xs mt-2">{clinician.tagline}</div>
+                <Link key={index} href="/doctors" className="block group">
+                  <Card
+                    className="border-0 bg-gray-900/90 backdrop-blur-sm hover:bg-gray-800 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative shadow-xl border border-gray-800/50 h-full"
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${clinician.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500`}
+                    />
+                    <CardContent className="p-8 text-center space-y-6 relative z-10 flex flex-col justify-between h-full">
+                      <div className="relative">
+                        {clinician.image ? (
+                          <Image
+                            src={clinician.image}
+                            alt={`${clinician.name} - Physiogen Clinical Specialist`}
+                            width={112}
+                            height={112}
+                            className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white shadow-lg group-hover:scale-110 transition-all duration-300"
+                          />
+                        ) : (
+                          <div
+                            className={`w-28 h-28 bg-gradient-to-r ${clinician.gradient} rounded-full mx-auto transition-all duration-300 group-hover:scale-110 flex items-center justify-center text-white text-2xl font-light shadow-lg`}
+                          >
+                            {clinician.name.split(" ")[0].charAt(0) + clinician.name.split(" ")[1].charAt(0)}
+                          </div>
                         )}
+                        <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-lg border border-gray-700">
+                          <Award className="h-5 w-5 text-yellow-400" />
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-xl font-light text-white group-hover:text-blue-400 transition-colors duration-300">
+                            {clinician.name}
+                          </h3>
+                          <p className="text-blue-400 font-light text-sm mt-1">{clinician.role}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-gray-300 font-light text-sm">{clinician.specialty}</p>
+                          <div className="inline-flex items-center space-x-2 bg-gray-800 px-3 py-1 rounded-full text-xs text-gray-300">
+                            <Stethoscope className="h-3 w-3" />
+                            <span>{clinician.credentials}</span>
+                          </div>
+                          {clinician.tagline && (
+                            <div className="text-pink-300 font-light text-xs mt-2">{clinician.tagline}</div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="pt-2">
+                        <span className="text-xs text-blue-400 group-hover:text-blue-300 flex items-center justify-center gap-1 font-medium">
+                          <span>View Profile & Book</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
+            </div>
+
+            <div className="pt-12 flex justify-center">
+              <Link
+                href="/doctors"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl text-white font-light text-sm shadow-lg shadow-blue-500/20"
+              >
+                <Calendar className="h-4 w-4" />
+                <span>Book Appointment With Our Specialists</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
@@ -1315,6 +1336,10 @@ export default function PhysiogenFit() {
                       </a>
                     ))}
                   </div>
+                </div>
+
+                <div className="pt-8">
+                  <ContactQueryForm />
                 </div>
               </div>
             </div>

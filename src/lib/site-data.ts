@@ -2,11 +2,12 @@
 
 export const NAV_ITEMS = [
   { label: "Clinical Services", href: "#clinical-services", section: true },
+  { label: "Consultation", href: "#consultation", section: true },
   { label: "Treatment Protocol", href: "#treatment-protocol", section: true },
   { label: "Clinical Team", href: "#clinical-team", section: true },
   { label: "Case Studies", href: "/clinical-case-studies" },
   { label: "Location", href: "#location", section: true },
-  { label: "Consultation", href: "#consultation", section: true },
+  { label: "Book Appointment", href: "/doctors" },
 ] as const
 
 export const PHONE = "+92 313 7818887"
